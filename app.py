@@ -5,6 +5,7 @@ from src.api_clients import (
     fetch_wikivoyage_article,
     retrieve_wikivoyage_context
 )
+from src.agent import generate_itinerary
 
 st.set_page_config(page_title="Trip Planner AI Agent", layout="wide")
 
@@ -32,6 +33,7 @@ with st.sidebar:
         st.rerun()
 
     use_wikivoyage = st.checkbox("Enable Wikivoyage travel context", value=True)
+    show_debug = st.checkbox("Show debug/tool output", value=True)
 
 api_key = st.session_state.openai_api_key
 
@@ -54,45 +56,75 @@ with col2:
 if st.button("Generate Itinerary"):
     if not destination:
         st.warning("Please enter a destination.")
+    elif not interests:
+        st.warning("Please select at least one interest.")
     else:
-        if api_key:
-            st.success("OpenAI API key stored in session.")
-        else:
-            st.info("No API key detected — running in MOCK mode.")
-
-        location = geocode_city(destination)
-
-        if not location:
-            st.error("Could not find that location.")
-        else:
-            st.write("### Geocoding Result")
-            st.json(location)
-
-            pois = search_pois(destination, interests, radius=3000, limit=20)
-
-            st.write("### Points of Interest")
-            if pois:
-                st.success(f"Found {len(pois)} POIs.")
-                st.dataframe(pois)
+        try:
+            if api_key:
+                st.success("OpenAI API key stored in session.")
             else:
-                st.warning("No POIs found for the selected interests.")
+                st.info("No API key detected — running in MOCK mode.")
 
-            if use_wikivoyage:
-                article = fetch_wikivoyage_article(destination)
+            itinerary, tool_state = generate_itinerary(
+                api_key=api_key,
+                destination=destination,
+                duration=duration,
+                interests=interests
+            )
 
-                st.write("### Wikivoyage")
-                if article:
-                    st.success(f"Fetched article: {article['title']}")
-                    st.text_area("Article Preview", article["text"][:2000], height=250)
+            st.write("## Generated Itinerary")
+            st.json(itinerary)
 
-                    rag_query = f"{destination} travel tips for {', '.join(interests)}"
-                    chunks = retrieve_wikivoyage_context(destination, rag_query, top_k=3)
+            st.write("## Tool State Summary")
+            st.write(f"POIs discovered: {len(tool_state['pois'])}")
+            st.write(f"Guide chunks retrieved: {len(tool_state['guide_chunks'])}")
 
-                    st.write("### Retrieved Travel Context")
-                    if chunks:
-                        for chunk in chunks:
-                            st.markdown(
-                                f"""
+            st.write("## Execution Trace")
+            st.json(tool_state["trace"])
+
+            if show_debug:
+                st.write("---")
+                st.write("## Debug / Tool Outputs")
+
+                location = geocode_city(destination)
+
+                if not location:
+                    st.error("Could not find that location.")
+                else:
+                    with st.expander("Geocoding Result", expanded=False):
+                        st.json(location)
+
+                    pois = search_pois(destination, interests, radius=3000, limit=20)
+
+                    with st.expander("Points of Interest", expanded=False):
+                        if pois:
+                            st.success(f"Found {len(pois)} POIs.")
+                            st.dataframe(pois)
+                        else:
+                            st.warning("No POIs found for the selected interests.")
+
+                    if use_wikivoyage:
+                        article = fetch_wikivoyage_article(destination)
+
+                        with st.expander("Wikivoyage Article Preview", expanded=False):
+                            if article:
+                                st.success(f"Fetched article: {article['title']}")
+                                st.text_area(
+                                    "Article Preview",
+                                    article["text"][:2000],
+                                    height=250
+                                )
+                            else:
+                                st.warning("Could not fetch Wikivoyage content for this destination.")
+
+                        rag_query = f"{destination} travel tips for {', '.join(interests)}"
+                        chunks = retrieve_wikivoyage_context(destination, rag_query, top_k=3)
+
+                        with st.expander("Retrieved Travel Context", expanded=False):
+                            if chunks:
+                                for chunk in chunks:
+                                    st.markdown(
+                                        f"""
 **Chunk ID:** {chunk['chunk_id']}  
 **Source:** {chunk['source']}  
 **Score:** {chunk['score']:.4f}
@@ -100,8 +132,9 @@ if st.button("Generate Itinerary"):
 {chunk['text']}
 ---
 """
-                            )
-                    else:
-                        st.warning("No relevant Wikivoyage chunks found.")
-                else:
-                    st.warning("Could not fetch Wikivoyage content for this destination.")
+                                    )
+                            else:
+                                st.warning("No relevant Wikivoyage chunks found.")
+
+        except Exception as e:
+            st.error(f"Agent error: {e}")
