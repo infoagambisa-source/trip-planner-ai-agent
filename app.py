@@ -1,4 +1,5 @@
 import streamlit as st
+from src.api_clients import geocode_city
 
 st.set_page_config(page_title="Trip Planner AI Agent", layout="wide")
 
@@ -27,7 +28,16 @@ if st.button("Generate Itinerary"):
         st.warning("Please enter a destination.")
 
     elif not api_key:
-        st.warning("Please ennter your OpenAI API key in the sidebar.")
+        st.warning("No API key detected - running in MOCK mode.")
+
+        location = geocode_city(destination)
+
+        if location:
+            st.success("Location found!")
+            st.write(location)
+
+        else: 
+            st.error("Could not find that location.")
     
     else:
         st.success("Setup looks good. Next we’ll connect the APIs and AI agent.")
