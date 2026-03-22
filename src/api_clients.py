@@ -1,6 +1,11 @@
 import requests
 import time
 import streamlit as st
+import re
+import html
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 USER_AGENT = "trip-planner-capstone/1.0 (info.agambisa@gmail.com)"
 HEADERS = {"User-Agent": USER_AGENT}
@@ -185,3 +190,212 @@ def search_pois(city_name, interests, radius=3000, limit=20):
             all_pois.append(poi)
 
     return all_pois[:limit]
+
+def _strip_html(raw_html):
+    """
+    Convert HTML into readable plain text.
+    """
+    if not raw_html:
+        return ""
+
+    text = html.unescape(raw_html)
+
+    # Remove unwanted blocks first
+    text = re.sub(r"<script.*?>.*?</script>", " ", text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r"<style.*?>.*?</style>", " ", text, flags=re.DOTALL | re.IGNORECASE)
+
+    # Preserve paragraph-like breaks
+    text = re.sub(r"</p\s*>", "\n\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"</h[1-6]\s*>", "\n\n", text, flags=re.IGNORECASE)
+    text = re.sub(r"</li\s*>", "\n", text, flags=re.IGNORECASE)
+
+    # Remove remaining tags
+    text = re.sub(r"<[^>]+>", " ", text)
+
+    # Clean whitespace
+    text = re.sub(r"\r", "", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    text = re.sub(r"[ \t]{2,}", " ", text)
+
+    return text.strip()
+
+
+def _chunk_text(text, chunk_size=900, min_chunk_size=250):
+    """
+    Chunk text while preserving paragraph boundaries and avoiding awkward splits.
+    """
+    if not text:
+        return []
+
+    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    chunks = []
+    current = ""
+
+    for paragraph in paragraphs:
+        candidate = f"{current}\n\n{paragraph}".strip() if current else paragraph
+
+        if len(candidate) <= chunk_size:
+            current = candidate
+        else:
+            if current:
+                chunks.append(current.strip())
+
+            # If a single paragraph is too long, split on sentence boundaries
+            if len(paragraph) > chunk_size:
+                sentences = re.split(r"(?<=[.!?])\s+", paragraph)
+                temp = ""
+
+                for sentence in sentences:
+                    sentence_candidate = f"{temp} {sentence}".strip() if temp else sentence
+                    if len(sentence_candidate) <= chunk_size:
+                        temp = sentence_candidate
+                    else:
+                        if temp:
+                            chunks.append(temp.strip())
+                        temp = sentence
+
+                if temp:
+                    current = temp.strip()
+                else:
+                    current = ""
+            else:
+                current = paragraph
+
+    if current:
+        chunks.append(current.strip())
+
+    # Merge very small trailing chunks where possible
+    merged = []
+    for chunk in chunks:
+        if merged and len(chunk) < min_chunk_size and len(merged[-1]) + len(chunk) + 2 <= chunk_size:
+            merged[-1] = f"{merged[-1]}\n\n{chunk}".strip()
+        else:
+            merged.append(chunk)
+
+    return merged
+
+
+@st.cache_data(show_spinner=False)
+def fetch_wikivoyage_article(destination):
+    """
+    Fetch rendered HTML content for a Wikivoyage page using the MediaWiki API.
+    """
+    search_url = "https://en.wikivoyage.org/w/api.php"
+    search_params = {
+        "action": "query",
+        "list": "search",
+        "srsearch": destination,
+        "format": "json",
+        "srlimit": 1
+    }
+
+    search_response = _make_request_with_retries("GET", search_url, params=search_params)
+    if search_response is None:
+        return None
+
+    try:
+        search_data = search_response.json()
+        results = search_data.get("query", {}).get("search", [])
+        if not results:
+            return None
+        title = results[0]["title"]
+    except (ValueError, KeyError, IndexError) as e:
+        print(f"Error parsing Wikivoyage search response: {e}")
+        return None
+
+    parse_params = {
+        "action": "parse",
+        "page": title,
+        "prop": "text",
+        "format": "json"
+    }
+
+    parse_response = _make_request_with_retries("GET", search_url, params=parse_params)
+    if parse_response is None:
+        return None
+
+    try:
+        parse_data = parse_response.json()
+        raw_html = parse_data["parse"]["text"]["*"]
+        plain_text = _strip_html(raw_html)
+
+        return {
+            "title": title,
+            "source": f"Wikivoyage:{title}",
+            "text": plain_text
+        }
+    except (ValueError, KeyError, TypeError) as e:
+        print(f"Error parsing Wikivoyage article content: {e}")
+        return None
+
+
+@st.cache_data(show_spinner=False)
+def build_wikivoyage_index(destination, chunk_size=900):
+    """
+    Fetch, clean, chunk, and vectorize a Wikivoyage article for a destination.
+    """
+    article = fetch_wikivoyage_article(destination)
+    if not article:
+        return None
+
+    chunks = _chunk_text(article["text"], chunk_size=chunk_size)
+    if not chunks:
+        return None
+
+    vectorizer = TfidfVectorizer(
+        stop_words="english",
+        ngram_range=(1, 2),
+        max_features=5000
+    )
+    chunk_vectors = vectorizer.fit_transform(chunks)
+
+    chunk_records = []
+    for idx, chunk in enumerate(chunks):
+        chunk_records.append({
+            "chunk_id": f"{article['title'].replace(' ', '_').lower()}_{idx}",
+            "source": article["source"],
+            "text": chunk
+        })
+
+    return {
+        "title": article["title"],
+        "source": article["source"],
+        "chunks": chunk_records,
+        "vectorizer": vectorizer,
+        "chunk_vectors": chunk_vectors
+    }
+
+
+@st.cache_data(show_spinner=False)
+def retrieve_wikivoyage_context(destination, query, top_k=5):
+    """
+    Retrieve the most relevant Wikivoyage chunks for a query.
+    """
+    index = build_wikivoyage_index(destination)
+    if not index:
+        return []
+
+    vectorizer = index["vectorizer"]
+    chunk_vectors = index["chunk_vectors"]
+    chunk_records = index["chunks"]
+
+    try:
+        query_vector = vectorizer.transform([query])
+        scores = cosine_similarity(query_vector, chunk_vectors)[0]
+    except Exception as e:
+        print(f"Error during semantic retrieval: {e}")
+        return []
+
+    ranked_indices = scores.argsort()[::-1][:top_k]
+
+    results = []
+    for idx in ranked_indices:
+        results.append({
+            "chunk_id": chunk_records[idx]["chunk_id"],
+            "source": chunk_records[idx]["source"],
+            "text": chunk_records[idx]["text"],
+            "score": float(scores[idx])
+        })
+
+    return results
