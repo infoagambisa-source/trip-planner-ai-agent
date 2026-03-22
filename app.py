@@ -46,30 +46,25 @@ with col2:
 if st.button("Generate Itinerary"):
     if not destination:
         st.warning("Please enter a destination.")
-
     else:
         if api_key:
-            st.success("OpeanAI API key stored in session.")
+            st.success("OpenAI API key stored in session.")
         else:
-            st.info("No API key detected - running in MOCK mode.")
-        
+            st.info("No API key detected — running in MOCK mode.")
+
         location = geocode_city(destination)
 
-        if location:
-            st.success("Location found!")
+        if not location:
+            st.error("Could not find that location.")
+        else:
             st.write("### Geocoding Result")
             st.json(location)
 
-            pois = search_pois(location["lat"], location["lon"], query="restaurant")
+            pois = search_pois(destination, interests, radius=3000, limit=20)
 
-            st.write("### Nearby POIs (restaurants)")
+            st.write("### Points of Interest")
             if pois:
-                st.write(f"Found {len(pois)} POIs.")
+                st.success(f"Found {len(pois)} POIs.")
                 st.dataframe(pois)
             else:
-                st.warning("No POIs found.")
-
-        else: 
-            st.error("Could not find that location.")
-    
-    
+                st.warning("No POIs found for the selected interests.")
