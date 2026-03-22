@@ -1,19 +1,24 @@
+import json
 import streamlit as st
-from src.api_clients import (
-    geocode_city,
-    search_pois,
-    fetch_wikivoyage_article,
-    retrieve_wikivoyage_context
-)
+
 from src.agent import generate_itinerary
+from src.state_manager import load_app_state, save_app_state
 
 st.set_page_config(page_title="Trip Planner AI Agent", layout="wide")
 
+# Session state setup
 if "openai_api_key" not in st.session_state:
     st.session_state.openai_api_key = ""
 
+if "itinerary" not in st.session_state:
+    saved_state = load_app_state()
+    st.session_state.itinerary = saved_state.get("saved_itinerary")
+
+if "tool_state" not in st.session_state:
+    st.session_state.tool_state = {"pois": {}, "guide_chunks": {}, "trace": []}
+
 st.title("Trip Planner AI Agent")
-st.write("Plan intelligent trips with AI, live POI search, and optional Wikivoyage RAG.")
+st.write("Create personalised itineraries with POI search, optional travel-guide retrieval, and structured daily plans.")
 
 with st.sidebar:
     st.header("Settings")
@@ -32,109 +37,127 @@ with st.sidebar:
         st.session_state.openai_api_key = ""
         st.rerun()
 
-    use_wikivoyage = st.checkbox("Enable Wikivoyage travel context", value=True)
-    show_debug = st.checkbox("Show debug/tool output", value=True)
+    show_trace = st.checkbox("Show execution trace", value=True)
 
-api_key = st.session_state.openai_api_key
-
-st.subheader("Trip Details")
+st.subheader("Plan Your Trip")
 
 col1, col2 = st.columns(2)
 
 with col1:
     destination = st.text_input("Destination", placeholder="e.g. Paris")
-    start_date = st.date_input("Start date")
+    start_date =st.date_input("Start Date")
+    duration = st.number_input("Trip length (days)", min_value=1, max_value=30, value=3)
+    pace = st.selectbox("Pace", options=["relaxed", "balanced", "fast"], index=1)
 
 with col2:
-    duration = st.number_input("Trip duration (days)", min_value=1, max_value=30, value=3)
     interests = st.multiselect(
         "Interests",
         options=["food", "museums", "outdoors", "history", "art", "shopping", "nightlife", "family"],
         default=["food", "museums"]
     )
+    constraints = st.text_area(
+        "Constraints",
+        placeholder="e.g. vegetarian food only, budget-friendly, avoid late nights, family-friendly"
+    )
 
-if st.button("Generate Itinerary"):
+generate_clicked = st.button("Generate Itinerary", type="primary")
+
+if generate_clicked:
     if not destination:
         st.warning("Please enter a destination.")
     elif not interests:
         st.warning("Please select at least one interest.")
     else:
-        try:
-            if api_key:
-                st.success("OpenAI API key stored in session.")
-            else:
-                st.info("No API key detected — running in MOCK mode.")
+        with st.status("Generating itinerary...", expanded=True) as status:
+            st.write("Collecting destination context...")
+            st.write("Searching for points of interest...")
+            st.write("Retrieving travel-guide context...")
+            st.write("Building itinerary...")
 
-            itinerary, tool_state = generate_itinerary(
-                api_key=api_key,
-                destination=destination,
-                duration=duration,
-                interests=interests
-            )
+            try:
+                itinerary, tool_state = generate_itinerary(
+                    api_key=st.session_state.openai_api_key,
+                    destination=destination,
+                    duration=duration,
+                    pace=pace,
+                    interests=interests,
+                    constraints=constraints,
+                    start_date=str(start_date)
+                )
 
-            st.write("## Generated Itinerary")
-            st.json(itinerary)
+                st.session_state.itinerary = itinerary
+                st.session_state.tool_state = tool_state
+                save_app_state(itinerary)
 
-            st.write("## Tool State Summary")
-            st.write(f"POIs discovered: {len(tool_state['pois'])}")
-            st.write(f"Guide chunks retrieved: {len(tool_state['guide_chunks'])}")
+                status.update(label="Itinerary generated successfully.", state="complete")
+            except Exception as e:
+                status.update(label="Generation failed.", state="error")
+                st.error(f"Agent error: {e}")
 
-            st.write("## Execution Trace")
-            st.json(tool_state["trace"])
+itinerary = st.session_state.itinerary
 
-            if show_debug:
-                st.write("---")
-                st.write("## Debug / Tool Outputs")
+def render_block(title, activities):
+    st.subheader(title)
+    if not activities:
+        st.caption("No activities planned.")
+        return
 
-                location = geocode_city(destination)
+    for item in activities:
+        st.markdown(f"**{item.get('time', '')} — {item.get('name', 'Unknown place')}**")
+        st.write(item.get("activity", ""))
+        st.caption(item.get("why", ""))
 
-                if not location:
-                    st.error("Could not find that location.")
-                else:
-                    with st.expander("Geocoding Result", expanded=False):
-                        st.json(location)
+        meta_parts = []
+        if item.get("category"):
+            meta_parts.append(f"Category: {item['category']}")
+        if item.get("poi_id"):
+            meta_parts.append(f"POI ID: {item['poi_id']}")
+        if meta_parts:
+            st.caption(" | ".join(meta_parts))
 
-                    pois = search_pois(destination, interests, radius=3000, limit=20)
+        citations = item.get("citations", [])
+        if citations:
+            st.caption("Sources: " + ", ".join(citations))
 
-                    with st.expander("Points of Interest", expanded=False):
-                        if pois:
-                            st.success(f"Found {len(pois)} POIs.")
-                            st.dataframe(pois)
-                        else:
-                            st.warning("No POIs found for the selected interests.")
+        st.markdown("---")
 
-                    if use_wikivoyage:
-                        article = fetch_wikivoyage_article(destination)
+if itinerary:
+    st.write("## Itinerary Overview")
+    st.markdown(f"**Destination:** {itinerary.get('destination', '')}")
+    st.markdown(f"**Duration:** {itinerary.get('duration_days', '')} day(s)")
+    st.markdown(f"**Pace:** {itinerary.get('pace', '')}")
+    st.markdown(f"**Constraints:** {itinerary.get('constraints', 'None') or 'None'}")
+    st.write(itinerary.get("summary", ""))
 
-                        with st.expander("Wikivoyage Article Preview", expanded=False):
-                            if article:
-                                st.success(f"Fetched article: {article['title']}")
-                                st.text_area(
-                                    "Article Preview",
-                                    article["text"][:2000],
-                                    height=250
-                                )
-                            else:
-                                st.warning("Could not fetch Wikivoyage content for this destination.")
+    st.write("## Daily Itinerary")
 
-                        rag_query = f"{destination} travel tips for {', '.join(interests)}"
-                        chunks = retrieve_wikivoyage_context(destination, rag_query, top_k=3)
+    for day in itinerary.get("days", []):
+        st.markdown(f"### Day {day.get('day')} — {day.get('theme', '')}")
 
-                        with st.expander("Retrieved Travel Context", expanded=False):
-                            if chunks:
-                                for chunk in chunks:
-                                    st.markdown(
-                                        f"""
-**Chunk ID:** {chunk['chunk_id']}  
-**Source:** {chunk['source']}  
-**Score:** {chunk['score']:.4f}
+        col1, col2, col3 = st.columns(3)
 
-{chunk['text']}
----
-"""
-                                    )
-                            else:
-                                st.warning("No relevant Wikivoyage chunks found.")
+        with col1:
+            render_block("Morning", day.get("morning", []))
+        with col2:
+            render_block("Afternoon", day.get("afternoon", []))
+        with col3:
+            render_block("Evening", day.get("evening", []))
 
-        except Exception as e:
-            st.error(f"Agent error: {e}")
+    st.write("## Export")
+    itinerary_json = json.dumps(itinerary, indent=2, ensure_ascii=False)
+    st.download_button(
+        label="Download Itinerary JSON",
+        data=itinerary_json,
+        file_name="itinerary.json",
+        mime="application/json"
+    )
+
+    if show_trace:
+        st.write("## Agent Trace")
+        st.json(st.session_state.tool_state.get("trace", []))
+
+        st.write("## Tool Summary")
+        st.write(f"POIs discovered: {len(st.session_state.tool_state.get('pois', {}))}")
+        st.write(f"Guide chunks retrieved: {len(st.session_state.tool_state.get('guide_chunks', {}))}")
+else:
+    st.info("No itinerary generated yet. Fill in the trip details and click Generate Itinerary.")

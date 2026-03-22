@@ -1,3 +1,177 @@
 {
-    "saved_itineraries":[]
+  "saved_itinerary": {
+    "destination": "London",
+    "start_date": "2026-03-22",
+    "duration_days": 5,
+    "pace": "relaxed",
+    "constraints": "",
+    "summary": "A 5-day relaxed-pace itinerary for London starting on 2026-03-22 focused on outdoors, history, museums. Includes context from 3 retrieved guide chunks.",
+    "days": [
+      {
+        "day": 1,
+        "theme": "Day 1 in London",
+        "morning": [
+          {
+            "time": "09:00",
+            "name": "Unnamed",
+            "activity": "Visit Unnamed",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "node/321509757",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "afternoon": [
+          {
+            "time": "13:00",
+            "name": "The Mound",
+            "activity": "Explore The Mound",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "node/8794628426",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "evening": []
+      },
+      {
+        "day": 2,
+        "theme": "Day 2 in London",
+        "morning": [
+          {
+            "time": "09:00",
+            "name": "Russell Square",
+            "activity": "Visit Russell Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/3241371",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "afternoon": [
+          {
+            "time": "13:00",
+            "name": "Tavistock Square",
+            "activity": "Explore Tavistock Square",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/3241840",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "evening": []
+      },
+      {
+        "day": 3,
+        "theme": "Day 3 in London",
+        "morning": [
+          {
+            "time": "09:00",
+            "name": "Kensington Gardens",
+            "activity": "Visit Kensington Gardens",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/3986346",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "afternoon": [
+          {
+            "time": "13:00",
+            "name": "Lincoln's Inn",
+            "activity": "Explore Lincoln's Inn",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4075108",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "evening": []
+      },
+      {
+        "day": 4,
+        "theme": "Day 4 in London",
+        "morning": [
+          {
+            "time": "09:00",
+            "name": "Grosvenor Square",
+            "activity": "Visit Grosvenor Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/4081049",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "afternoon": [
+          {
+            "time": "13:00",
+            "name": "Leicester Square",
+            "activity": "Explore Leicester Square",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4082589",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "evening": []
+      },
+      {
+        "day": 5,
+        "theme": "Day 5 in London",
+        "morning": [
+          {
+            "time": "09:00",
+            "name": "Woburn Square",
+            "activity": "Visit Woburn Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/4253286",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "afternoon": [
+          {
+            "time": "13:00",
+            "name": "Gordon Square",
+            "activity": "Explore Gordon Square",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4253288",
+            "category": "outdoors",
+            "citations": [
+              "london_197",
+              "london_198"
+            ]
+          }
+        ],
+        "evening": []
+      }
+    ]
+  }
 }

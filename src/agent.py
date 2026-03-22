@@ -15,21 +15,28 @@ def validate_itinerary_poi_ids(itinerary, allowed_pois):
                     raise ValueError(f"Invalid poi_id in itinerary: {poi_id}")
 
 
-def build_user_prompt(destination, duration, interests):
+def build_user_prompt(destination, duration, pace, interests, constraints):
     interests_text = ", ".join(interests) if interests else "general sightseeing"
+    constraints_text = constraints if constraints else "None"
+
     return f"""
 Create a {duration}-day itinerary for {destination}.
 
 User interests: {interests_text}
+Trip pace: {pace}
+Constraints: {constraints_text}
 
 Requirements:
 - Use tools when needed.
 - Only use POIs that came from tool results.
+- Keep the itinerary realistic for the requested pace.
 - Return JSON with this structure:
 
 {{
   "destination": "string",
   "duration_days": integer,
+  "pace": "string",
+  "constraints": "string",
   "summary": "string",
   "days": [
     {{
@@ -38,8 +45,12 @@ Requirements:
       "morning": [
         {{
           "time": "string",
+          "name": "string",
           "activity": "string",
-          "poi_id": "string"
+          "why": "string",
+          "poi_id": "string",
+          "category": "string",
+          "citations": ["string"]
         }}
       ],
       "afternoon": [],
@@ -50,18 +61,14 @@ Requirements:
 """
 
 
-def mock_agent_plan(destination, duration, interests, tool_state):
-    """
-    Temporary fallback until billing is enabled.
-    Uses already-built tools to simulate an agent flow.
-    """
+def mock_agent_plan(destination, duration, pace, interests, constraints, start_date, tool_state):
     pois = execute_tool(
         "search_pois",
         {
             "city_name": destination,
             "interests": interests,
             "radius": 3000,
-            "limit": 15
+            "limit": 18
         },
         tool_state
     )
@@ -70,13 +77,22 @@ def mock_agent_plan(destination, duration, interests, tool_state):
         "retrieve_guides",
         {
             "destination": destination,
-            "query": f"{destination} travel tips for {', '.join(interests)}",
+            "query": f"{destination} travel tips for {', '.join(interests)} with a {pace} pace",
             "top_k": 3
         },
         tool_state
     )
 
-    selected = pois[: min(len(pois), duration * 3)]
+    if pace == "relaxed":
+        items_per_day = 2
+    elif pace == "fast":
+        items_per_day = 3
+    else:
+        items_per_day = 3
+
+    selected = pois[: min(len(pois), duration * items_per_day)]
+
+    chunk_ids = [chunk["chunk_id"] for chunk in guide_chunks[:2]]
 
     days = []
     idx = 0
@@ -86,26 +102,41 @@ def mock_agent_plan(destination, duration, interests, tool_state):
         evening = []
 
         if idx < len(selected):
+            poi = selected[idx]
             morning.append({
                 "time": "09:00",
-                "activity": f"Visit {selected[idx]['name']}",
-                "poi_id": selected[idx]["poi_id"]
+                "name": poi["name"],
+                "activity": f"Visit {poi['name']}",
+                "why": f"Good match for your interest in {poi['category']}.",
+                "poi_id": poi["poi_id"],
+                "category": poi["category"],
+                "citations": chunk_ids
             })
             idx += 1
 
         if idx < len(selected):
+            poi = selected[idx]
             afternoon.append({
                 "time": "13:00",
-                "activity": f"Explore {selected[idx]['name']}",
-                "poi_id": selected[idx]["poi_id"]
+                "name": poi["name"],
+                "activity": f"Explore {poi['name']}",
+                "why": f"Recommended as a worthwhile {poi['category']} stop in {destination}.",
+                "poi_id": poi["poi_id"],
+                "category": poi["category"],
+                "citations": chunk_ids
             })
             idx += 1
 
-        if idx < len(selected):
+        if pace != "relaxed" and idx < len(selected):
+            poi = selected[idx]
             evening.append({
                 "time": "18:00",
-                "activity": f"Enjoy time at {selected[idx]['name']}",
-                "poi_id": selected[idx]["poi_id"]
+                "name": poi["name"],
+                "activity": f"Spend the evening at {poi['name']}",
+                "why": f"Adds variety to the day and fits your selected interests.",
+                "poi_id": poi["poi_id"],
+                "category": poi["category"],
+                "citations": chunk_ids
             })
             idx += 1
 
@@ -117,13 +148,18 @@ def mock_agent_plan(destination, duration, interests, tool_state):
             "evening": evening
         })
 
-    summary = f"A {duration}-day itinerary for {destination} focused on {', '.join(interests)}."
+    summary = f"A {duration}-day {pace}-pace itinerary for {destination} starting on {start_date} focused on {', '.join(interests)}."
+    if constraints:
+        summary += f" Constraints considered: {constraints}."
     if guide_chunks:
-        summary += f" Enhanced with {len(guide_chunks)} travel-guide chunks."
+        summary += f" Includes context from {len(guide_chunks)} retrieved guide chunks."
 
     itinerary = {
         "destination": destination,
+        "start_date": start_date,
         "duration_days": duration,
+        "pace": pace,
+        "constraints": constraints,
         "summary": summary,
         "days": days
     }
@@ -132,7 +168,7 @@ def mock_agent_plan(destination, duration, interests, tool_state):
     return itinerary
 
 
-def run_openai_agent(api_key, destination, duration, interests, max_steps=6):
+def run_openai_agent(api_key, destination, duration, pace, interests, constraints, max_steps=6):
     client = OpenAI(api_key=api_key)
 
     tool_state = {
@@ -143,14 +179,8 @@ def run_openai_agent(api_key, destination, duration, interests, max_steps=6):
     }
 
     input_items = [
-        {
-            "role": "system",
-            "content": SYSTEM_PROMPT
-        },
-        {
-            "role": "user",
-            "content": build_user_prompt(destination, duration, interests)
-        }
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": build_user_prompt(destination, duration, pace, interests, constraints)}
     ]
 
     for step in range(max_steps):
@@ -165,10 +195,7 @@ def run_openai_agent(api_key, destination, duration, interests, max_steps=6):
             tools=get_tool_definitions()
         )
 
-        function_calls = [
-            item for item in response.output
-            if item.type == "function_call"
-        ]
+        function_calls = [item for item in response.output if item.type == "function_call"]
 
         if not function_calls:
             final_text = response.output_text
@@ -187,18 +214,16 @@ def run_openai_agent(api_key, destination, duration, interests, max_steps=6):
             result = execute_tool(tool_name, arguments, tool_state)
 
             input_items.append(call)
-            input_items.append(
-                {
-                    "type": "function_call_output",
-                    "call_id": call.call_id,
-                    "output": format_tool_result(tool_name, result)
-                }
-            )
+            input_items.append({
+                "type": "function_call_output",
+                "call_id": call.call_id,
+                "output": format_tool_result(tool_name, result)
+            })
 
     raise RuntimeError("Agent stopped after reaching max_steps without producing a final itinerary.")
 
 
-def generate_itinerary(api_key, destination, duration, interests):
+def generate_itinerary(api_key, destination, duration, pace, interests, constraints, start_date):
     tool_state = {
         "pois": {},
         "guide_chunks": {},
@@ -211,9 +236,12 @@ def generate_itinerary(api_key, destination, duration, interests):
             api_key=api_key,
             destination=destination,
             duration=duration,
-            interests=interests
+            pace=pace,
+            interests=interests,
+            constraints=constraints,
+            start_date=start_date
         )
         return itinerary, tool_state
 
-    itinerary = mock_agent_plan(destination, duration, interests, tool_state)
+    itinerary = mock_agent_plan(destination, duration, pace, interests, constraints, start_date, tool_state)
     return itinerary, tool_state
