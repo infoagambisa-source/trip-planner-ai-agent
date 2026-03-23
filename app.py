@@ -30,8 +30,21 @@ if "map_style" not in st.session_state:
 if "previous_itinerary" not in st.session_state:
     st.session_state.previous_itinerary = None
 
+if "fast_mode" not in st.session_state:
+    st.session_state.fast_mode = False
+
+if "model_name" not in st.session_state:
+    st.session_state.model_name = "gpt-4.1-mini"
+
+if "max_steps" not in st.session_state:
+    st.session_state.max_steps = 6
+
 st.title("Trip Planner AI Agent")
 st.write("Create personalised itineraries with POI search, optional travel-guide retrieval, and structured daily plans.")
+st.info(
+    "Enter a destination, choose your pace and interests, then generate an itinerary. "
+    "Use Fast Mode for quicker drafts, and refine later for better results."
+)
 
 with st.sidebar:
     st.header("Settings")
@@ -49,6 +62,37 @@ with st.sidebar:
     if st.button("Clear API Key"):
         st.session_state.openai_api_key = ""
         st.rerun()
+        
+    st.header("Configuration")
+
+    st.session_state.fast_mode = st.toggle(
+        "Fast Mode",
+        value=st.session_state.fast_mode,
+        help="Uses fewer tool calls and lighter retrieval for faster results."
+    )
+
+    st.session_state.model_name = st.selectbox(
+        "Model",
+        options=["gpt-4.1-mini"],
+        index=0,
+        help="Choose the model used for itinerary generation when billing is enabled."
+    )
+
+    st.session_state.max_steps = st.slider(
+        "Max Agent Steps",
+        min_value=3,
+        max_value=10,
+        value=st.session_state.max_steps,
+        help="Limits how many reasoning/tool steps the agent can take."
+    )
+
+    show_trace = st.checkbox(
+        "Show execution trace",
+        value=True,
+        help="View tool calls and timings after generation."
+    )
+
+    st.caption("Tip: Fast Mode is useful for quick drafts and slower connections.")
 
     show_trace = st.checkbox("Show execution trace", value=True)
     
@@ -71,6 +115,8 @@ with col2:
         options=["food", "museums", "outdoors", "history", "art", "shopping", "nightlife", "family"],
         default=["food", "museums"]
     )
+    st.caption("Pick interests that best match the kind of trip you want.")
+    
     constraints = st.text_area(
         "Constraints",
         placeholder="e.g. vegetarian food only, budget-friendly, avoid late nights, family-friendly"
@@ -85,6 +131,9 @@ if generate_clicked:
         st.warning(error_message)
     else:
         with st.status("Generating itinerary...", expanded=True) as status:
+            if st.session_state.fast_mode:
+                st.write("⚡ Fast Mode is enabled: using fewer tool calls for quicker results.")
+            
             st.write("Collecting destination context...")
             st.write("Searching for points of interest...")
             st.write("Retrieving travel-guide context...")
@@ -98,7 +147,10 @@ if generate_clicked:
                     pace=pace,
                     interests=interests,
                     constraints=constraints,
-                    start_date=str(start_date)
+                    start_date=str(start_date),
+                    model_name=st.session_state.model_name,
+                    max_steps=5 if st.session_state.fast_mode else st.session_state.max_steps,
+                    fast_mode=st.session_state.fast_mode
                 )
 
                 if not itinerary or not itinerary.get("days"):
@@ -323,6 +375,9 @@ if itinerary:
                 )
 
                 with st.status("Refining itinerary...", expanded=True) as status:
+                    if st.session_state.fast_mode:
+                        status.write("⚡ Fast Mode is enabled for refinement.")
+                    
                     status.write("Reviewing existing itinerary...")
                     status.write("Applying refinement instructions...")
                     status.write("Validating POI references...")
@@ -332,7 +387,9 @@ if itinerary:
                         existing_itinerary=st.session_state.itinerary,
                         user_request=refinement_request,
                         tool_state=st.session_state.tool_state,
-                        target_day=target_day if refine_mode == "Single day" else None
+                        target_day=target_day if refine_mode == "Single day" else None,
+                        model_name=st.session_state.model_name,
+                        max_steps=5 if st.session_state.fast_mode else st.session_state.max_steps
                     )
 
                     st.session_state.itinerary = refined_itinerary
@@ -374,7 +431,21 @@ if itinerary:
 
     if show_trace:
         st.write("## Agent Trace")
-        st.json(st.session_state.tool_state.get("trace", []))
+
+        trace_rows = []
+        for entry in st.session_state.tool_state.get("trace", []):
+            trace_rows.append({
+                "step_type": entry.get("step_type", ""),
+                "step": entry.get("step", ""),
+                "tool_name": entry.get("tool_name", ""),
+                "result_count": entry.get("result_count", ""),
+                "elapsed_sec": entry.get("elapsed_sec", "")
+            })
+
+        if trace_rows:
+            st.dataframe(trace_rows, use_container_width=True)
+        else:
+            st.caption("No trace data available.")
 
         st.write("## Tool Summary")
         st.write(f"POIs discovered: {len(st.session_state.tool_state.get('pois', {}))}")

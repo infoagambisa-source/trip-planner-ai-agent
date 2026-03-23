@@ -63,7 +63,7 @@ def _make_request_with_retries(method, url, max_retries=3, backoff=2, **kwargs):
 
     return None
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def geocode_city(city_name):
     """
     Convert a city name into latitude and longitude using Nominatim API.
@@ -151,7 +151,7 @@ def _extract_poi(element, category):
     }
    
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def search_pois(city_name, interests, radius=3000, limit=20):
     """
     Search for POIs in a city based on one or more interests.
@@ -318,7 +318,7 @@ def _chunk_text(text, chunk_size=900, min_chunk_size=250):
     return merged
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def fetch_wikivoyage_article(destination):
     """
     Fetch rendered HTML content for a Wikivoyage page using the MediaWiki API.
@@ -372,7 +372,7 @@ def fetch_wikivoyage_article(destination):
         return None
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def build_wikivoyage_index(destination, chunk_size=900):
     """
     Fetch, clean, chunk, and vectorize a Wikivoyage article for a destination.
@@ -409,7 +409,7 @@ def build_wikivoyage_index(destination, chunk_size=900):
     }
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=3600)
 def retrieve_wikivoyage_context(destination, query, top_k=5):
     """
     Retrieve the most relevant Wikivoyage chunks for a query.

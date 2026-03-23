@@ -1,9 +1,11 @@
 import copy
 import json
+import time
 from openai import OpenAI
 from src.prompts import SYSTEM_PROMPT
 from src.tools import get_tool_definitions, execute_tool, format_tool_result
 from src.utils import safe_json_loads
+
 
 def validate_itinerary_poi_ids(itinerary, allowed_pois):
     valid_ids = set(allowed_pois.keys())
@@ -31,9 +33,15 @@ def validate_single_day_unchanged(original_itinerary, refined_itinerary, target_
             raise ValueError(f"Day {day_num} changed during single-day regeneration.")
 
 
-def build_user_prompt(destination, duration, pace, interests, constraints, start_date):
+def build_user_prompt(destination, duration, pace, interests, constraints, start_date, fast_mode=False):
     interests_text = ", ".join(interests) if interests else "general sightseeing"
     constraints_text = constraints if constraints else "None"
+
+    tool_instructions = (
+        "Call search_pois ONCE with broad criteria and keep tool usage minimal."
+        if fast_mode
+        else "You may call search_pois more than once if needed, but avoid unnecessary repetition."
+    )
 
     return f"""
 Create a {duration}-day itinerary for {destination}.
@@ -42,6 +50,9 @@ Start date: {start_date}
 User interests: {interests_text}
 Trip pace: {pace}
 Constraints: {constraints_text}
+
+Tool strategy:
+{tool_instructions}
 
 Requirements:
 - Use tools when needed.
@@ -106,42 +117,47 @@ User request:
 
 Rules:
 - Preserve the same JSON structure.
-- Do not change destination, start_date, duration_days, or other metadata unless absolutely required for consistency.
 - Only use POIs already available from tool calls.
-- Days other than day {target_day} must remain byte-for-byte identical in meaning and structure.
+- Days other than day {target_day} must remain unchanged.
 
 Existing itinerary:
 {json.dumps(existing_itinerary, ensure_ascii=False)}
 """
 
 
-def mock_agent_plan(destination, duration, pace, interests, constraints, start_date, tool_state):
+def mock_agent_plan(destination, duration, pace, interests, constraints, start_date, tool_state, fast_mode=False):
+    poi_limit = 40 if fast_mode else 24
+
+    start = time.perf_counter()
     pois = execute_tool(
         "search_pois",
         {
             "city_name": destination,
             "interests": interests,
             "radius": 3000,
-            "limit": 24
+            "limit": poi_limit
         },
         tool_state
     )
+    tool_state["trace"][-1]["elapsed_sec"] = round(time.perf_counter() - start, 3)
 
     if not pois:
         raise ValueError(
             f"No matching POIs were found for {destination} with interests: {', '.join(interests)}. "
-            "Try broader interests, a larger search area, or a nearby city."
+            "Try broader interests, a larger city, or fewer constraints."
         )
 
+    start = time.perf_counter()
     guide_chunks = execute_tool(
         "retrieve_guides",
         {
             "destination": destination,
             "query": f"{destination} travel tips for {', '.join(interests)} with a {pace} pace",
-            "top_k": 3
+            "top_k": 2 if fast_mode else 3
         },
         tool_state
     )
+    tool_state["trace"][-1]["elapsed_sec"] = round(time.perf_counter() - start, 3)
 
     items_per_day = 2 if pace == "relaxed" else 3
     selected = pois[: min(len(pois), duration * items_per_day)]
@@ -215,9 +231,7 @@ def mock_agent_plan(destination, duration, pace, interests, constraints, start_d
 
 def mock_refine_itinerary(existing_itinerary, user_request, tool_state, target_day=None):
     refined = copy.deepcopy(existing_itinerary)
-
-    note = f" Refined request: {user_request}"
-    refined["summary"] = refined.get("summary", "") + note
+    refined["summary"] = refined.get("summary", "") + f" Refined request: {user_request}"
 
     if target_day is None:
         for day in refined.get("days", []):
@@ -240,7 +254,7 @@ def mock_refine_itinerary(existing_itinerary, user_request, tool_state, target_d
     return refined
 
 
-def run_openai_agent(api_key, prompt, tool_state, max_steps=6):
+def run_openai_agent(api_key, prompt, tool_state, model_name="gpt-4.1-mini", max_steps=6):
     client = OpenAI(api_key=api_key)
 
     input_items = [
@@ -249,16 +263,23 @@ def run_openai_agent(api_key, prompt, tool_state, max_steps=6):
     ]
 
     for step in range(max_steps):
-        tool_state["trace"].append({"step_type": "model_call", "step": step + 1})
+        step_start = time.perf_counter()
+        tool_state["trace"].append({
+            "step_type": "model_call",
+            "step": step + 1,
+            "model": model_name
+        })
 
         try:
             response = client.responses.create(
-                model="gpt-4.1-mini",
+                model=model_name,
                 input=input_items,
                 tools=get_tool_definitions()
             )
         except Exception as e:
             raise RuntimeError(f"OpenAI agent call failed at step {step + 1}: {e}") from e
+
+        tool_state["trace"][-1]["elapsed_sec"] = round(time.perf_counter() - step_start, 3)
 
         function_calls = [item for item in response.output if item.type == "function_call"]
 
@@ -271,7 +292,10 @@ def run_openai_agent(api_key, prompt, tool_state, max_steps=6):
         for call in function_calls:
             tool_name = call.name
             arguments = safe_json_loads(call.arguments, context=f"{tool_name} arguments")
+
+            tool_start = time.perf_counter()
             result = execute_tool(tool_name, arguments, tool_state)
+            tool_state["trace"][-1]["elapsed_sec"] = round(time.perf_counter() - tool_start, 3)
 
             input_items.append(call)
             input_items.append({
@@ -283,7 +307,18 @@ def run_openai_agent(api_key, prompt, tool_state, max_steps=6):
     raise RuntimeError("Agent reached max_steps without producing a final itinerary.")
 
 
-def generate_itinerary(api_key, destination, duration, pace, interests, constraints, start_date):
+def generate_itinerary(
+    api_key,
+    destination,
+    duration,
+    pace,
+    interests,
+    constraints,
+    start_date,
+    model_name="gpt-4.1-mini",
+    max_steps=6,
+    fast_mode=False
+):
     tool_state = {
         "pois": {},
         "guide_chunks": {},
@@ -292,24 +327,42 @@ def generate_itinerary(api_key, destination, duration, pace, interests, constrai
     }
 
     if api_key:
-        prompt = build_user_prompt(destination, duration, pace, interests, constraints, start_date)
-        return run_openai_agent(api_key, prompt, tool_state)
+        prompt = build_user_prompt(destination, duration, pace, interests, constraints, start_date, fast_mode=fast_mode)
+        return run_openai_agent(
+            api_key=api_key,
+            prompt=prompt,
+            tool_state=tool_state,
+            model_name=model_name,
+            max_steps=max_steps
+        )
 
-    itinerary = mock_agent_plan(destination, duration, pace, interests, constraints, start_date, tool_state)
+    itinerary = mock_agent_plan(
+        destination,
+        duration,
+        pace,
+        interests,
+        constraints,
+        start_date,
+        tool_state,
+        fast_mode=fast_mode
+    )
     return itinerary, tool_state
 
 
-def refine_itinerary(api_key, existing_itinerary, user_request, tool_state, target_day=None):
+def refine_itinerary(api_key, existing_itinerary, user_request, tool_state, target_day=None, model_name="gpt-4.1-mini", max_steps=6):
     if not existing_itinerary:
         raise ValueError("No existing itinerary to refine.")
 
-    if target_day is not None:
-        prompt = build_single_day_prompt(existing_itinerary, user_request, target_day)
-    else:
-        prompt = build_refinement_prompt(existing_itinerary, user_request)
+    prompt = build_single_day_prompt(existing_itinerary, user_request, target_day) if target_day is not None else build_refinement_prompt(existing_itinerary, user_request)
 
     if api_key:
-        refined_itinerary, updated_tool_state = run_openai_agent(api_key, prompt, tool_state)
+        refined_itinerary, updated_tool_state = run_openai_agent(
+            api_key=api_key,
+            prompt=prompt,
+            tool_state=tool_state,
+            model_name=model_name,
+            max_steps=max_steps
+        )
         validate_itinerary_poi_ids(refined_itinerary, updated_tool_state["pois"])
         if target_day is not None:
             validate_single_day_unchanged(existing_itinerary, refined_itinerary, target_day)
