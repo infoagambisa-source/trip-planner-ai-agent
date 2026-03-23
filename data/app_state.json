@@ -1,355 +1,421 @@
 {
   "saved_itinerary": {
-    "destination": "Paris",
-    "start_date": "2026-03-23",
+    "destination": "London",
+    "start_date": "2026-05-18",
     "duration_days": 5,
-    "pace": "relaxed",
+    "pace": "balanced",
     "constraints": "",
-    "summary": "A 5-day relaxed-pace itinerary for Paris starting on 2026-03-23 focused on history. Includes context from 3 retrieved guide chunks.",
+    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-05-18 focused on food, museums. Includes context from 3 retrieved guide chunks.",
     "days": [
       {
         "day": 1,
-        "theme": "Day 1 in Paris",
+        "theme": "Day 1 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Statue de George Washington",
-            "activity": "Visit Statue de George Washington",
-            "why": "Good match for your interest in history.",
-            "poi_id": "node/570349020",
-            "category": "history",
+            "name": "Woburn Cafe",
+            "activity": "Visit Woburn Cafe",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/25475389",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Unnamed",
-            "activity": "Explore Unnamed",
-            "why": "Recommended as a worthwhile history stop in Paris.",
-            "poi_id": "node/676789031",
-            "category": "history",
+            "name": "Cafe Angel",
+            "activity": "Explore Cafe Angel",
+            "why": "Recommended as a worthwhile food stop in London.",
+            "poi_id": "node/25497832",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
-        "evening": []
+        "evening": [
+          {
+            "time": "18:00",
+            "name": "Old Tree Daiwan Bee",
+            "activity": "Spend the evening at Old Tree Daiwan Bee",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "node/26845558",
+            "category": "food",
+            "citations": [
+              "london_1",
+              "london_197"
+            ]
+          }
+        ]
       },
       {
         "day": 2,
-        "theme": "Day 2 in Paris",
+        "theme": "Day 2 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Statue de Saint-Louis",
-            "activity": "Visit Statue de Saint-Louis",
-            "why": "Good match for your interest in history.",
-            "poi_id": "node/676907609",
-            "category": "history",
+            "name": "Farmer J",
+            "activity": "Visit Farmer J",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/60660465",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Maison natale de Molière",
-            "activity": "Explore Maison natale de Molière",
-            "why": "Recommended as a worthwhile history stop in Paris.",
-            "poi_id": "node/678802923",
-            "category": "history",
+            "name": "The Serpentine Lido Cafe",
+            "activity": "Explore The Serpentine Lido Cafe",
+            "why": "Recommended as a worthwhile food stop in London.",
+            "poi_id": "node/130210673",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
-        "evening": []
+        "evening": [
+          {
+            "time": "18:00",
+            "name": "Starbucks",
+            "activity": "Spend the evening at Starbucks",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "node/140681851",
+            "category": "food",
+            "citations": [
+              "london_1",
+              "london_197"
+            ]
+          }
+        ]
       },
       {
         "day": 3,
-        "theme": "Day 3 in Paris",
+        "theme": "Day 3 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Maison natale de Molière",
-            "activity": "Visit Maison natale de Molière",
-            "why": "Good match for your interest in history.",
-            "poi_id": "node/678833516",
-            "category": "history",
+            "name": "Greggs",
+            "activity": "Visit Greggs",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/140697749",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Jacob Kaplan",
-            "activity": "Explore Jacob Kaplan",
-            "why": "Recommended as a worthwhile history stop in Paris.",
-            "poi_id": "node/702915148",
-            "category": "history",
+            "name": "Bon Gusto",
+            "activity": "Explore Bon Gusto",
+            "why": "Recommended as a worthwhile food stop in London.",
+            "poi_id": "node/169355678",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
-        "evening": []
+        "evening": [
+          {
+            "time": "18:00",
+            "name": "Bank Restaurant & Bar",
+            "activity": "Spend the evening at Bank Restaurant & Bar",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "node/169368767",
+            "category": "food",
+            "citations": [
+              "london_1",
+              "london_197"
+            ]
+          }
+        ]
       },
       {
         "day": 4,
-        "theme": "Day 4 in Paris",
+        "theme": "Day 4 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Conciergerie",
-            "activity": "Visit Conciergerie",
-            "why": "Good match for your interest in history.",
-            "poi_id": "node/910390736",
-            "category": "history",
+            "name": "Buckingham Coffee Lounge",
+            "activity": "Visit Buckingham Coffee Lounge",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/169436940",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Samuel Champlain",
-            "activity": "Explore Samuel Champlain",
-            "why": "Recommended as a worthwhile history stop in Paris.",
-            "poi_id": "node/918240758",
-            "category": "history",
+            "name": "Spaghetti House",
+            "activity": "Explore Spaghetti House",
+            "why": "Recommended as a worthwhile food stop in London.",
+            "poi_id": "node/180403503",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
-        "evening": []
+        "evening": [
+          {
+            "time": "18:00",
+            "name": "Las Iguanas",
+            "activity": "Spend the evening at Las Iguanas",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "node/247957988",
+            "category": "food",
+            "citations": [
+              "london_1",
+              "london_197"
+            ]
+          }
+        ]
       },
       {
         "day": 5,
-        "theme": "Day 5 in Paris",
+        "theme": "Day 5 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Jacques Cartier",
-            "activity": "Visit Jacques Cartier",
-            "why": "Good match for your interest in history.",
-            "poi_id": "node/918240892",
-            "category": "history",
+            "name": "The Garrick",
+            "activity": "Visit The Garrick",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/256497884",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Gérard de Nerval",
-            "activity": "Explore Gérard de Nerval",
-            "why": "Recommended as a worthwhile history stop in Paris.",
-            "poi_id": "node/1055820722",
-            "category": "history",
+            "name": "Goya",
+            "activity": "Explore Goya",
+            "why": "Recommended as a worthwhile food stop in London.",
+            "poi_id": "node/259569252",
+            "category": "food",
             "citations": [
-              "paris_207",
-              "paris_12"
+              "london_1",
+              "london_197"
             ]
           }
         ],
-        "evening": []
+        "evening": [
+          {
+            "time": "18:00",
+            "name": "Sketch",
+            "activity": "Spend the evening at Sketch",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "node/259774384",
+            "category": "food",
+            "citations": [
+              "london_1",
+              "london_197"
+            ]
+          }
+        ]
       }
     ]
   },
   "saved_tool_state": {
     "pois": {
-      "node/570349020": {
-        "poi_id": "node/570349020",
-        "name": "Statue de George Washington",
-        "category": "history",
-        "lat": 48.8647358,
-        "lon": 2.2939065,
+      "node/25475389": {
+        "poi_id": "node/25475389",
+        "name": "Woburn Cafe",
+        "category": "food",
+        "lat": 51.5265807,
+        "lon": -0.1292505,
         "url": ""
       },
-      "node/676789031": {
-        "poi_id": "node/676789031",
-        "name": "Unnamed",
-        "category": "history",
-        "lat": 48.8582886,
-        "lon": 2.3421238,
+      "node/25497832": {
+        "poi_id": "node/25497832",
+        "name": "Cafe Angel",
+        "category": "food",
+        "lat": 51.5247641,
+        "lon": -0.1161125,
         "url": ""
       },
-      "node/676907609": {
-        "poi_id": "node/676907609",
-        "name": "Statue de Saint-Louis",
-        "category": "history",
-        "lat": 48.8492181,
-        "lon": 2.3413228,
+      "node/26845558": {
+        "poi_id": "node/26845558",
+        "name": "Old Tree Daiwan Bee",
+        "category": "food",
+        "lat": 51.5110542,
+        "lon": -0.1325596,
         "url": ""
       },
-      "node/678802923": {
-        "poi_id": "node/678802923",
-        "name": "Maison natale de Molière",
-        "category": "history",
-        "lat": 48.8612403,
-        "lon": 2.3448392,
+      "node/60660465": {
+        "poi_id": "node/60660465",
+        "name": "Farmer J",
+        "category": "food",
+        "lat": 51.5229924,
+        "lon": -0.1257455,
         "url": ""
       },
-      "node/678833516": {
-        "poi_id": "node/678833516",
-        "name": "Maison natale de Molière",
-        "category": "history",
-        "lat": 48.861512,
-        "lon": 2.3423978,
+      "node/130210673": {
+        "poi_id": "node/130210673",
+        "name": "The Serpentine Lido Cafe",
+        "category": "food",
+        "lat": 51.5046688,
+        "lon": -0.1696555,
+        "url": "https://www.royalparks.org.uk/parks/hyde-park/food-and-drink/lido-bar-and-cafe"
+      },
+      "node/140681851": {
+        "poi_id": "node/140681851",
+        "name": "Starbucks",
+        "category": "food",
+        "lat": 51.4989916,
+        "lon": -0.1354995,
         "url": ""
       },
-      "node/702915148": {
-        "poi_id": "node/702915148",
-        "name": "Jacob Kaplan",
-        "category": "history",
-        "lat": 48.8569879,
-        "lon": 2.3587014,
+      "node/140697749": {
+        "poi_id": "node/140697749",
+        "name": "Greggs",
+        "category": "food",
+        "lat": 51.4982302,
+        "lon": -0.1352163,
+        "url": "https://www.greggs.co.uk/shop-finder?shop-code=0919"
+      },
+      "node/169355678": {
+        "poi_id": "node/169355678",
+        "name": "Bon Gusto",
+        "category": "food",
+        "lat": 51.4992102,
+        "lon": -0.1378188,
         "url": ""
       },
-      "node/910390736": {
-        "poi_id": "node/910390736",
-        "name": "Conciergerie",
-        "category": "history",
-        "lat": 48.8559492,
-        "lon": 2.3460263,
-        "url": "https://www.paris-conciergerie.fr"
+      "node/169368767": {
+        "poi_id": "node/169368767",
+        "name": "Bank Restaurant & Bar",
+        "category": "food",
+        "lat": 51.4986304,
+        "lon": -0.1372558,
+        "url": "https://www.individualrestaurants.com/"
       },
-      "node/918240758": {
-        "poi_id": "node/918240758",
-        "name": "Samuel Champlain",
-        "category": "history",
-        "lat": 48.8650266,
-        "lon": 2.3105711,
+      "node/169436940": {
+        "poi_id": "node/169436940",
+        "name": "Buckingham Coffee Lounge",
+        "category": "food",
+        "lat": 51.4987752,
+        "lon": -0.1412257,
         "url": ""
       },
-      "node/918240892": {
-        "poi_id": "node/918240892",
-        "name": "Jacques Cartier",
-        "category": "history",
-        "lat": 48.8650092,
-        "lon": 2.3105788,
+      "node/180403503": {
+        "poi_id": "node/180403503",
+        "name": "Spaghetti House",
+        "category": "food",
+        "lat": 51.5186204,
+        "lon": -0.1214512,
+        "url": "https://www.spaghettihouse.co.uk/location/holborn/"
+      },
+      "node/247957988": {
+        "poi_id": "node/247957988",
+        "name": "Las Iguanas",
+        "category": "food",
+        "lat": 51.5055602,
+        "lon": -0.1176655,
+        "url": "https://www.iguanas.co.uk/restaurants/london-royal-festival-hall/"
+      },
+      "node/256497884": {
+        "poi_id": "node/256497884",
+        "name": "The Garrick",
+        "category": "food",
+        "lat": 51.5134807,
+        "lon": -0.1165232,
+        "url": "http://www.lse.ac.uk/intranet/LSEServices/cateringServices/restaurantsAndCafes/garrick.aspx"
+      },
+      "node/259569252": {
+        "poi_id": "node/259569252",
+        "name": "Goya",
+        "category": "food",
+        "lat": 51.4884009,
+        "lon": -0.1374885,
         "url": ""
       },
-      "node/1055820722": {
-        "poi_id": "node/1055820722",
-        "name": "Gérard de Nerval",
-        "category": "history",
-        "lat": 48.8578005,
-        "lon": 2.3486134,
+      "node/259774384": {
+        "poi_id": "node/259774384",
+        "name": "Sketch",
+        "category": "food",
+        "lat": 51.5127342,
+        "lon": -0.1414857,
+        "url": "https://sketch.london/"
+      },
+      "node/261325961": {
+        "poi_id": "node/261325961",
+        "name": "Tia Maria Bar & Kitchen",
+        "category": "food",
+        "lat": 51.4808939,
+        "lon": -0.12483,
         "url": ""
       },
-      "node/1202457766": {
-        "poi_id": "node/1202457766",
-        "name": "Unnamed",
-        "category": "history",
-        "lat": 48.8659656,
-        "lon": 2.3556029,
-        "url": ""
+      "node/262565580": {
+        "poi_id": "node/262565580",
+        "name": "Giraffe",
+        "category": "food",
+        "lat": 51.5063119,
+        "lon": -0.1171395,
+        "url": "https://www.giraffe.net/"
       },
-      "node/1204772626": {
-        "poi_id": "node/1204772626",
-        "name": "César Franck",
-        "category": "history",
-        "lat": 48.858974,
-        "lon": 2.3198678,
-        "url": ""
-      },
-      "node/1307645935": {
-        "poi_id": "node/1307645935",
-        "name": "Unnamed",
-        "category": "history",
-        "lat": 48.8472709,
-        "lon": 2.3092324,
-        "url": ""
-      },
-      "node/1440131521": {
-        "poi_id": "node/1440131521",
-        "name": "Thermes de Cluny",
-        "category": "history",
-        "lat": 48.8506016,
-        "lon": 2.3432743,
-        "url": "https://archeologie.culture.gouv.fr/paris/fr/les-thermes-de-cluny"
-      },
-      "node/1466909540": {
-        "poi_id": "node/1466909540",
-        "name": "Unnamed",
-        "category": "history",
-        "lat": 48.8690691,
-        "lon": 2.2836287,
-        "url": ""
-      },
-      "node/1502267687": {
-        "poi_id": "node/1502267687",
-        "name": "Général Diego Brosset",
-        "category": "history",
-        "lat": 48.8550574,
-        "lon": 2.2889995,
-        "url": ""
-      },
-      "node/1542715903": {
-        "poi_id": "node/1542715903",
-        "name": "Unnamed",
-        "category": "history",
-        "lat": 48.8670075,
-        "lon": 2.3437683,
-        "url": ""
-      },
-      "node/1658985868": {
-        "poi_id": "node/1658985868",
-        "name": "Édouard Vuillard ( 1868 - 1940 )",
-        "category": "history",
-        "lat": 48.8828595,
-        "lon": 2.330029,
-        "url": ""
+      "node/262565828": {
+        "poi_id": "node/262565828",
+        "name": "PizzaExpress",
+        "category": "food",
+        "lat": 51.4888419,
+        "lon": -0.137108,
+        "url": "https://www.pizzaexpress.com/london-pimlico"
       }
     },
     "guide_chunks": {
-      "paris_207": {
-        "chunk_id": "paris_207",
-        "source": "Wikivoyage:Paris",
-        "text": "The Orient Express , which historically ran Paris- Istanbul , has been partially recreated as a seasonal luxury tourist train , but tickets are not cheap.\n\nSaint-Denis - On the northern edge of the metropolis, site of the Stade de France and St Denis Abbey, burial place of French royalty.\n\nVersailles - On the southwestern edge of Paris, the site of the Sun King Louis XIV's magnificent palace. 20-40 min train ride by RER (line C) from central Paris.\n\nRoutes through Paris\n\nENDS AT PORTE DE GENTILLY ←\n \n   N     S  \n \n → Orly Airport → Lyon / Bordeaux \n \n \n Rouen ← Boulogne-Billancourt ←\n \n   W     E  \n \n → ENDS AT PORTE D'AUTEUIL\n\nThis city travel guide to Paris has guide status. It has a variety of good, quality information including hotels, restaurants, attractions and travel details. Please contribute and help us make it a star !",
-        "score": 0.1357628845480342
+      "london_1": {
+        "chunk_id": "london_1",
+        "source": "Wikivoyage:London",
+        "text": "For the visitor, there is a seemingly endless choice of historical sites, shopping, museums, food, art galleries, nightlife, and activities. Once a Celtic settlement, London is a bustling city, where visitors come to experience the urban heritage and see its specific royal-themed attractions.\n\nDistricts",
+        "score": 0.16242104223520631
       },
-      "paris_12": {
-        "chunk_id": "paris_12",
-        "source": "Wikivoyage:Paris",
-        "text": "To enjoy the wonders of Paris, make realistic plans. The number of attractions and landmarks is overwhelming; visiting only the most famous ones (which are overcrowded during major holidays) takes more than a week. The city also has more to offer for people who take time for a calm stroll along the back streets. If your time in the city is short, be selective, and save some attractions for your next visit.\n\nParis je t'aime . The website of the tourist office.  ( updated Jan 2024 )\n\nSPOT24 , 101 quai Jacques Chirac, Paris 15th ( Metro: Bir-Hakeim (line 6); RER: Champ-de-Mars—Tour Eiffel (line C); Vélib': station 7023 ). Daily 10:00-18:00 . The City of Paris welcome centre also has an exhibition and shop.  ( updated Jan 2024 ) \n \n History",
-        "score": 0.10658389383705405
+      "london_197": {
+        "chunk_id": "london_197",
+        "source": "Wikivoyage:London",
+        "text": "[ edit ] \n Natural History Museum, dubbed the 'cathedral of nature' \n Central London hosts an outstanding collection of world-class museums and galleries, several of truly iconic status.\n\nEven better, London is unique among global capitals in that the majority of the museums have no entrance charges, allowing visitors to make multiple visits with ease. Special or temporary exhibitions usually attract an admission charge.\n\nLondon museums and galleries with no general admission charge (free entry!) include:\n\nBritish Museum (Tube: Holborn)—a treasure trove of world cultures from across the ages, on par with the Paris Louvre and New York's Metropolitan Museum\n\nNational Gallery (Tube: Charing Cross)—houses the national collection of paintings in the Western European tradition from the 13th to the 19th centuries\n\nNational Portrait Gallery (Tube: Charing Cross)",
+        "score": 0.12159554452873171
       },
-      "paris_36": {
-        "chunk_id": "paris_36",
-        "source": "Wikivoyage:Paris",
-        "text": "TER : The regional trains ( Train Express Régional ); cheapest tickets, though prices are variable on the time of day of departure (and the day of departure as well). TER are sometimes slower, stopping at almost all stations. TER tickets bought at the train station are valid two months from the date indicated on the ticket, as long as you travel in the right fare period (\"période bleue\", the cheapest, \"période blanche\", for high-demand hours). There is no seat reservation, so arrive early enough or you may have to travel without a seat.",
-        "score": 0.10450513824540195
+      "london_252": {
+        "chunk_id": "london_252",
+        "source": "Wikivoyage:London",
+        "text": "[ edit ] \n Although Tesco, Sainsbury's and other supermarkets run smaller stores in central London, full-size superstores, including Morrisons and ASDA, are rare in the city centre – with the exception of the Sainsbury's in Pimlico – and you will usually have to take a 15- to 20-minute Tube ride to reach one.\n\nMarks & Spencer , an upmarket retailer, also operate food halls branded as \"Simply Food\". They can be found across central London . The smaller stores, such as those found in train stations, tend to focus mostly on ready-to-eat food such as sandwiches, drinks, snacks, and also essentials such as bread and milk.\n\nDrink\n\n[ edit ] \n London is home to a great many pubs, bars and nightclubs. The online city guide View London and the weekly magazine Time Out tell what's going in London's night life, as well as cultural events in general.\n\nPubs and bars",
+        "score": 0.11992075826115864
       }
     },
-    "last_city": "Paris",
+    "last_city": "London",
     "trace": [
       {
         "step_type": "tool_execution",
         "tool_name": "search_pois",
         "arguments": {
-          "city_name": "Paris",
+          "city_name": "London",
           "interests": [
-            "history"
+            "food",
+            "museums"
           ],
           "radius": 3000,
           "limit": 18
@@ -360,8 +426,8 @@
         "step_type": "tool_execution",
         "tool_name": "retrieve_guides",
         "arguments": {
-          "destination": "Paris",
-          "query": "Paris travel tips for history with a relaxed pace",
+          "destination": "London",
+          "query": "London travel tips for food, museums with a balanced pace",
           "top_k": 3
         },
         "result_count": 3

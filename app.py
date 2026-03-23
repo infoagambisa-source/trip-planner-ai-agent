@@ -167,9 +167,9 @@ if itinerary:
 
     if filtered_points:
         map_style_value = (
-            "mapbox://styles/mapbox/light-v9"
+            "light" #"mapbox://styles/mapbox/light-v9"
             if st.session_state.map_style == "light"
-            else "mapbox://styles/mapbox/dark-v10"
+            else "dark" #"mapbox://styles/mapbox/dark-v10"
         )
 
         view_state_dict = compute_view_state(filtered_points)
@@ -178,9 +178,9 @@ if itinerary:
             "ScatterplotLayer",
             data=filtered_points,
             get_position="[lon, lat]",
-            get_radius=35,
-            radius_min_pixels=3,
-            radius_max_pixels=10,
+            get_radius=60,  #changed from 35 to 60
+            radius_min_pixels=5, #changed from 3 to 5
+            radius_max_pixels=15, #changed from 10 to 15
             pickable=True
         )
 
