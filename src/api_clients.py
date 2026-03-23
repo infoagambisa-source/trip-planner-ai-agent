@@ -24,13 +24,35 @@ INTEREST_TO_TAGS = {
 
 def _make_request_with_retries(method, url, max_retries=3, backoff=2, **kwargs):
     """
-    Make an HTTP request with basic retry logic. 
+    Make an HTTP request with retry logic and basic rate-limit handling.
     """
     for attempt in range(max_retries):
         try:
-            response = requests.request(method, url, headers=HEADERS, timeout=60, **kwargs)
+            response = requests.request(
+                method,
+                url,
+                headers=HEADERS,
+                timeout=20,
+                **kwargs
+            )
+
+            if response.status_code == 429:
+                wait_time = backoff ** attempt
+                print(f"Rate limited by {url}. Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+                continue
+
             response.raise_for_status()
             return response
+
+        except requests.Timeout:
+            if attempt == max_retries - 1:
+                print(f"Request timed out after {max_retries} attempts: {url}")
+                return None
+            wait_time = backoff ** attempt
+            print(f"Timeout calling {url}. Retrying in {wait_time} seconds...")
+            time.sleep(wait_time)
+
         except requests.RequestException as e:
             if attempt == max_retries - 1:
                 print(f"Request failed after {max_retries} attempts: {e}")
@@ -38,6 +60,7 @@ def _make_request_with_retries(method, url, max_retries=3, backoff=2, **kwargs):
             wait_time = backoff ** attempt
             print(f"Request error: {e}. Retrying in {wait_time} seconds...")
             time.sleep(wait_time)
+
     return None
 
 @st.cache_data(show_spinner=False)
@@ -50,7 +73,7 @@ def geocode_city(city_name):
     url = "https://nominatim.openstreetmap.org/search"
 
     params = {
-        "q": city_name,
+        "q": city_name.strip(),
         "format": "json",
         "limit": 1
     }
@@ -63,7 +86,7 @@ def geocode_city(city_name):
 
     try:
         data = response.json()
-        if not data:
+        if not isinstance(data, list) or not data:
             return None
         
         return {
@@ -175,11 +198,16 @@ def search_pois(city_name, interests, radius=3000, limit=20):
 
         try:
             data = response.json()
+            if not isinstance(data, dict):
+                continue
+            elements = data.get("elements", [])
+            if not isinstance(elements, list):
+                continue
         except ValueError as e:
             print(f"Error parsing Overpass response: {e}")
             continue
 
-        for element in data.get("elements", []):
+        for element in elements:
             poi = _extract_poi(element, interest)
             if not poi:
                 continue
@@ -311,10 +339,10 @@ def fetch_wikivoyage_article(destination):
     try:
         search_data = search_response.json()
         results = search_data.get("query", {}).get("search", [])
-        if not results:
+        if not isinstance(results, list) or not results:
             return None
         title = results[0]["title"]
-    except (ValueError, KeyError, IndexError) as e:
+    except (ValueError, KeyError, IndexError, TypeError) as e:
         print(f"Error parsing Wikivoyage search response: {e}")
         return None
 

@@ -19,6 +19,9 @@ def itinerary_to_map_data(itinerary, poi_lookup):
 
                 if not poi:
                     continue
+                
+                if poi.get("lat") is None or poi.get("lon") is None:
+                    continue
 
                 point = {
                     "poi_id": poi_id,
@@ -31,6 +34,7 @@ def itinerary_to_map_data(itinerary, poi_lookup):
                     "time": item.get("time", ""),
                     "why": item.get("why", "")
                 }
+
                 points.append(point)
                 ordered_positions.append([poi.get("lon"), poi.get("lat")])
 

@@ -3,7 +3,7 @@ import json
 from openai import OpenAI
 from src.prompts import SYSTEM_PROMPT
 from src.tools import get_tool_definitions, execute_tool, format_tool_result
-
+from src.utils import safe_json_loads
 
 def validate_itinerary_poi_ids(itinerary, allowed_pois):
     valid_ids = set(allowed_pois.keys())
@@ -127,6 +127,12 @@ def mock_agent_plan(destination, duration, pace, interests, constraints, start_d
         tool_state
     )
 
+    if not pois:
+        raise ValueError(
+            f"No matching POIs were found for {destination} with interests: {', '.join(interests)}. "
+            "Try broader interests, a larger search area, or a nearby city."
+        )
+
     guide_chunks = execute_tool(
         "retrieve_guides",
         {
@@ -245,23 +251,26 @@ def run_openai_agent(api_key, prompt, tool_state, max_steps=6):
     for step in range(max_steps):
         tool_state["trace"].append({"step_type": "model_call", "step": step + 1})
 
-        response = client.responses.create(
-            model="gpt-4.1-mini",
-            input=input_items,
-            tools=get_tool_definitions()
-        )
+        try:
+            response = client.responses.create(
+                model="gpt-4.1-mini",
+                input=input_items,
+                tools=get_tool_definitions()
+            )
+        except Exception as e:
+            raise RuntimeError(f"OpenAI agent call failed at step {step + 1}: {e}") from e
 
         function_calls = [item for item in response.output if item.type == "function_call"]
 
         if not function_calls:
             final_text = response.output_text
-            itinerary = json.loads(final_text)
+            itinerary = safe_json_loads(final_text, context="itinerary JSON")
             validate_itinerary_poi_ids(itinerary, tool_state["pois"])
             return itinerary, tool_state
 
         for call in function_calls:
             tool_name = call.name
-            arguments = json.loads(call.arguments)
+            arguments = safe_json_loads(call.arguments, context=f"{tool_name} arguments")
             result = execute_tool(tool_name, arguments, tool_state)
 
             input_items.append(call)

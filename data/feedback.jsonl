@@ -3,3 +3,8 @@
 {"ts": 1774280359.2689993, "city_key": "london", "poi_id": "way/4082589", "vote": "down"}
 {"ts": 1774280363.0205886, "city_key": "london", "poi_id": "way/4082589", "vote": "down"}
 {"ts": 1774280368.8109307, "city_key": "london", "poi_id": "way/4253527", "vote": "up"}
+{"ts": 1774294645.6378868, "city_key": "kumasi", "poi_id": "node/2169660915", "vote": "up"}
+{"ts": 1774294653.2098181, "city_key": "kumasi", "poi_id": "node/3577264884", "vote": "up"}
+{"ts": 1774294679.8769543, "city_key": "kumasi", "poi_id": "node/5332182021", "vote": "down"}
+{"ts": 1774294681.8180573, "city_key": "kumasi", "poi_id": "node/5332182021", "vote": "down"}
+{"ts": 1774294691.650728, "city_key": "kumasi", "poi_id": "node/5332182021", "vote": "down"}

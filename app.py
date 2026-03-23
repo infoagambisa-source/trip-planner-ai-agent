@@ -6,6 +6,7 @@ from src.agent import generate_itinerary, refine_itinerary
 from src.state_manager import load_app_state, save_app_state
 from src.map_utils import itinerary_to_map_data, filter_points_by_day, build_path_data, compute_view_state
 from src.feedback import save_feedback, normalize_city_key, feedback_stats_for_city
+from src.utils import validate_trip_inputs
 
 st.set_page_config(page_title="Trip Planner AI Agent", layout="wide")
 
@@ -78,10 +79,10 @@ with col2:
 generate_clicked = st.button("Generate Itinerary", type="primary")
 
 if generate_clicked:
-    if not destination:
-        st.warning("Please enter a destination.")
-    elif not interests:
-        st.warning("Please select at least one interest.")
+    error_message = validate_trip_inputs(destination, duration, pace, interests)
+
+    if error_message:
+        st.warning(error_message)
     else:
         with st.status("Generating itinerary...", expanded=True) as status:
             st.write("Collecting destination context...")
@@ -100,14 +101,29 @@ if generate_clicked:
                     start_date=str(start_date)
                 )
 
+                if not itinerary or not itinerary.get("days"):
+                    raise ValueError(
+                        "The itinerary was generated but contains no day plans. "
+                        "Try broadening your interests or choosing a larger city."
+                    )
+
                 st.session_state.itinerary = itinerary
                 st.session_state.tool_state = tool_state
                 save_app_state(itinerary, tool_state)
 
                 status.update(label="Itinerary generated successfully.", state="complete")
+
+            except ValueError as e:
+                status.update(label="Generation failed.", state="error")
+                st.error(str(e))
+
+            except RuntimeError as e:
+                status.update(label="Generation failed.", state="error")
+                st.error(str(e))
+
             except Exception as e:
                 status.update(label="Generation failed.", state="error")
-                st.error(f"Agent error: {e}")
+                st.error(f"Unexpected error while generating itinerary: {e}")
 
 itinerary = st.session_state.itinerary
 
@@ -328,8 +344,12 @@ if itinerary:
                 st.success("Itinerary updated.")
                 st.rerun()
 
+            except ValueError as e:
+                st.error(f"Refinement validation error: {e}")
+            except RuntimeError as e:
+                st.error(f"Refinement failed: {e}")
             except Exception as e:
-                st.error(f"Refinement error: {e}")
+                st.error(f"Unexpected refinement error: {e}")
 
     if st.session_state.previous_itinerary:
         with st.expander("Before / After Comparison", expanded=False):

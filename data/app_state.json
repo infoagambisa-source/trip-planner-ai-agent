@@ -1,238 +1,146 @@
 {
   "saved_itinerary": {
-    "destination": "London",
+    "destination": "Kumasi",
     "start_date": "2026-03-23",
-    "duration_days": 5,
+    "duration_days": 3,
     "pace": "balanced",
     "constraints": "",
-    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-03-23.",
+    "summary": "A 3-day balanced-pace itinerary for Kumasi starting on 2026-03-23.",
     "days": [
       {
         "day": 1,
-        "theme": "Day 1 in London",
+        "theme": "Day 1 in Kumasi",
         "morning": [
           {
             "time": "09:00",
-            "name": "Unnamed",
-            "activity": "Visit Unnamed",
-            "why": "Good match for your interest in outdoors.",
-            "poi_id": "node/321509757",
-            "category": "outdoors",
+            "name": "Niks Pizza",
+            "activity": "Visit Niks Pizza",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/2169660915",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "The Mound",
-            "activity": "Explore The Mound",
-            "why": "Recommended as a worthwhile outdoors stop in London.",
-            "poi_id": "node/8794628426",
-            "category": "outdoors",
+            "name": "Santino's",
+            "activity": "Explore Santino's",
+            "why": "Recommended as a worthwhile food stop in Kumasi.",
+            "poi_id": "node/3057177350",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Russell Square",
-            "activity": "Spend the evening at Russell Square",
+            "name": "Eclipse",
+            "activity": "Spend the evening at Eclipse",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "way/3241371",
-            "category": "outdoors",
+            "poi_id": "node/3577264884",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ]
       },
       {
         "day": 2,
-        "theme": "Day 2 in London",
+        "theme": "Day 2 in Kumasi",
         "morning": [
           {
             "time": "09:00",
-            "name": "Tavistock Square",
-            "activity": "Visit Tavistock Square",
-            "why": "Good match for your interest in outdoors.",
-            "poi_id": "way/3241840",
-            "category": "outdoors",
+            "name": "KFC",
+            "activity": "Visit KFC",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/5332182021",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Kensington Gardens",
-            "activity": "Explore Kensington Gardens",
-            "why": "Recommended as a worthwhile outdoors stop in London.",
-            "poi_id": "way/3986346",
-            "category": "outdoors",
+            "name": "Florash Kitchen",
+            "activity": "Explore Florash Kitchen",
+            "why": "Recommended as a worthwhile food stop in Kumasi.",
+            "poi_id": "node/5732005422",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Lincoln's Inn",
-            "activity": "Spend the evening at Lincoln's Inn",
+            "name": "Kentish restaurant",
+            "activity": "Spend the evening at Kentish restaurant",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "way/4075108",
-            "category": "outdoors",
+            "poi_id": "node/5843873789",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ]
       },
       {
         "day": 3,
-        "theme": "Day 3 in London",
+        "theme": "Day 3 in Kumasi",
         "morning": [
           {
             "time": "09:00",
-            "name": "Grosvenor Square",
-            "activity": "Visit Grosvenor Square",
-            "why": "Good match for your interest in outdoors.",
-            "poi_id": "way/4081049",
-            "category": "outdoors",
+            "name": "Ike's café and grill",
+            "activity": "Visit Ike's café and grill",
+            "why": "Good match for your interest in food.",
+            "poi_id": "node/5845633421",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Leicester Square",
-            "activity": "Explore Leicester Square",
-            "why": "Recommended as a worthwhile outdoors stop in London.",
-            "poi_id": "way/4082589",
-            "category": "outdoors",
+            "name": "Youngsters Canteen",
+            "activity": "Explore Youngsters Canteen",
+            "why": "Recommended as a worthwhile food stop in Kumasi.",
+            "poi_id": "node/5919221586",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Woburn Square",
-            "activity": "Spend the evening at Woburn Square",
+            "name": "Las Palmas",
+            "activity": "Spend the evening at Las Palmas",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "way/4253286",
-            "category": "outdoors",
+            "poi_id": "node/5921745590",
+            "category": "food",
             "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ]
-      },
-      {
-        "day": 4,
-        "theme": "Day 4 in London",
-        "morning": [
-          {
-            "time": "09:00",
-            "name": "Gordon Square",
-            "activity": "Visit Gordon Square",
-            "why": "Good match for your interest in outdoors.",
-            "poi_id": "way/4253288",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ],
-        "afternoon": [
-          {
-            "time": "13:00",
-            "name": "West Square Gardens",
-            "activity": "Explore West Square Gardens",
-            "why": "Recommended as a worthwhile outdoors stop in London.",
-            "poi_id": "way/4253527",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ],
-        "evening": [
-          {
-            "time": "18:00",
-            "name": "Queen Square Gardens",
-            "activity": "Spend the evening at Queen Square Gardens",
-            "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "way/4253646",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ]
-      },
-      {
-        "day": 5,
-        "theme": "Day 5 in London",
-        "morning": [
-          {
-            "time": "09:00",
-            "name": "Red Lion Square Gardens",
-            "activity": "Visit Red Lion Square Gardens",
-            "why": "Good match for your interest in outdoors.",
-            "poi_id": "way/4253657",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ],
-        "afternoon": [
-          {
-            "time": "13:00",
-            "name": "Berkeley Square",
-            "activity": "Explore Berkeley Square",
-            "why": "Recommended as a worthwhile outdoors stop in London.",
-            "poi_id": "way/4253887",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
-            ]
-          }
-        ],
-        "evening": [
-          {
-            "time": "18:00",
-            "name": "Unnamed",
-            "activity": "Spend the evening at Unnamed",
-            "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "way/4253932",
-            "category": "outdoors",
-            "citations": [
-              "london_48",
-              "london_339"
+              "kumasi_10",
+              "kumasi_4"
             ]
           }
         ]
@@ -241,229 +149,229 @@
   },
   "saved_tool_state": {
     "pois": {
-      "node/321509757": {
-        "poi_id": "node/321509757",
+      "node/2169660915": {
+        "poi_id": "node/2169660915",
+        "name": "Niks Pizza",
+        "category": "food",
+        "lat": 6.675582,
+        "lon": -1.6179996,
+        "url": ""
+      },
+      "node/3057177350": {
+        "poi_id": "node/3057177350",
+        "name": "Santino's",
+        "category": "food",
+        "lat": 6.6877105,
+        "lon": -1.6041617,
+        "url": ""
+      },
+      "node/3577264884": {
+        "poi_id": "node/3577264884",
+        "name": "Eclipse",
+        "category": "food",
+        "lat": 6.6911243,
+        "lon": -1.6210026,
+        "url": ""
+      },
+      "node/5332182021": {
+        "poi_id": "node/5332182021",
+        "name": "KFC",
+        "category": "food",
+        "lat": 6.6939725,
+        "lon": -1.6362625,
+        "url": ""
+      },
+      "node/5732005422": {
+        "poi_id": "node/5732005422",
+        "name": "Florash Kitchen",
+        "category": "food",
+        "lat": 6.68585,
+        "lon": -1.6178652,
+        "url": ""
+      },
+      "node/5843873789": {
+        "poi_id": "node/5843873789",
+        "name": "Kentish restaurant",
+        "category": "food",
+        "lat": 6.7011562,
+        "lon": -1.6297313,
+        "url": ""
+      },
+      "node/5845633421": {
+        "poi_id": "node/5845633421",
+        "name": "Ike's café and grill",
+        "category": "food",
+        "lat": 6.7014003,
+        "lon": -1.6281661,
+        "url": "http://ikescafegrill.com"
+      },
+      "node/5919221586": {
+        "poi_id": "node/5919221586",
+        "name": "Youngsters Canteen",
+        "category": "food",
+        "lat": 6.6863978,
+        "lon": -1.6118443,
+        "url": ""
+      },
+      "node/5921745590": {
+        "poi_id": "node/5921745590",
+        "name": "Las Palmas",
+        "category": "food",
+        "lat": 6.6855586,
+        "lon": -1.6147509,
+        "url": ""
+      },
+      "node/6052584303": {
+        "poi_id": "node/6052584303",
+        "name": "Starbites",
+        "category": "food",
+        "lat": 6.6867684,
+        "lon": -1.6237804,
+        "url": ""
+      },
+      "node/6052628735": {
+        "poi_id": "node/6052628735",
+        "name": "Paktoria's Kitchen",
+        "category": "food",
+        "lat": 6.6875451,
+        "lon": -1.623161,
+        "url": ""
+      },
+      "node/6104088887": {
+        "poi_id": "node/6104088887",
+        "name": "Vera Gamo",
+        "category": "food",
+        "lat": 6.6873924,
+        "lon": -1.644818,
+        "url": ""
+      },
+      "node/6109157786": {
+        "poi_id": "node/6109157786",
+        "name": "Cilla's Kitchen",
+        "category": "food",
+        "lat": 6.7174185,
+        "lon": -1.6309081,
+        "url": ""
+      },
+      "node/6195403587": {
+        "poi_id": "node/6195403587",
+        "name": "Friendly Indomie",
+        "category": "food",
+        "lat": 6.6861954,
+        "lon": -1.6151128,
+        "url": ""
+      },
+      "node/6467059373": {
+        "poi_id": "node/6467059373",
         "name": "Unnamed",
-        "category": "outdoors",
-        "lat": 51.5343778,
-        "lon": -0.1267216,
+        "category": "food",
+        "lat": 6.6890422,
+        "lon": -1.613782,
         "url": ""
       },
-      "node/8794628426": {
-        "poi_id": "node/8794628426",
-        "name": "The Mound",
-        "category": "outdoors",
-        "lat": 51.4989711,
-        "lon": -0.1463617,
+      "node/6654766816": {
+        "poi_id": "node/6654766816",
+        "name": "Vegetarian Food and Health Shop",
+        "category": "food",
+        "lat": 6.6903037,
+        "lon": -1.6233677,
         "url": ""
       },
-      "way/3241371": {
-        "poi_id": "way/3241371",
-        "name": "Russell Square",
-        "category": "outdoors",
-        "lat": 51.5216943,
-        "lon": -0.126069,
+      "node/8507108163": {
+        "poi_id": "node/8507108163",
+        "name": "Obaa Yaa",
+        "category": "food",
+        "lat": 6.7126389,
+        "lon": -1.6168384,
         "url": ""
       },
-      "way/3241840": {
-        "poi_id": "way/3241840",
-        "name": "Tavistock Square",
-        "category": "outdoors",
-        "lat": 51.5250414,
-        "lon": -0.1290244,
+      "node/8909673803": {
+        "poi_id": "node/8909673803",
+        "name": "Channel 3 & 4",
+        "category": "food",
+        "lat": 6.6980202,
+        "lon": -1.6335483,
         "url": ""
       },
-      "way/3986346": {
-        "poi_id": "way/3986346",
-        "name": "Kensington Gardens",
-        "category": "outdoors",
-        "lat": 51.5066483,
-        "lon": -0.1802014,
-        "url": "https://www.royalparks.org.uk/visit/parks/kensington-gardens"
-      },
-      "way/4075108": {
-        "poi_id": "way/4075108",
-        "name": "Lincoln's Inn",
-        "category": "outdoors",
-        "lat": 51.5170075,
-        "lon": -0.1144526,
-        "url": ""
-      },
-      "way/4081049": {
-        "poi_id": "way/4081049",
-        "name": "Grosvenor Square",
-        "category": "outdoors",
-        "lat": 51.5115067,
-        "lon": -0.1513923,
-        "url": ""
-      },
-      "way/4082589": {
-        "poi_id": "way/4082589",
-        "name": "Leicester Square",
-        "category": "outdoors",
-        "lat": 51.5104369,
-        "lon": -0.1301305,
-        "url": ""
-      },
-      "way/4253286": {
-        "poi_id": "way/4253286",
-        "name": "Woburn Square",
-        "category": "outdoors",
-        "lat": 51.5233255,
-        "lon": -0.1296417,
-        "url": ""
-      },
-      "way/4253288": {
-        "poi_id": "way/4253288",
-        "name": "Gordon Square",
-        "category": "outdoors",
-        "lat": 51.524262,
-        "lon": -0.1308717,
-        "url": ""
-      },
-      "way/4253527": {
-        "poi_id": "way/4253527",
-        "name": "West Square Gardens",
-        "category": "outdoors",
-        "lat": 51.4951846,
-        "lon": -0.1055267,
-        "url": ""
-      },
-      "way/4253646": {
-        "poi_id": "way/4253646",
-        "name": "Queen Square Gardens",
-        "category": "outdoors",
-        "lat": 51.5217715,
-        "lon": -0.1224453,
-        "url": ""
-      },
-      "way/4253657": {
-        "poi_id": "way/4253657",
-        "name": "Red Lion Square Gardens",
-        "category": "outdoors",
-        "lat": 51.5191892,
-        "lon": -0.1188966,
-        "url": ""
-      },
-      "way/4253887": {
-        "poi_id": "way/4253887",
-        "name": "Berkeley Square",
-        "category": "outdoors",
-        "lat": 51.5096414,
-        "lon": -0.1458119,
-        "url": ""
-      },
-      "way/4253932": {
-        "poi_id": "way/4253932",
+      "node/9765898626": {
+        "poi_id": "node/9765898626",
         "name": "Unnamed",
-        "category": "outdoors",
-        "lat": 51.5106382,
-        "lon": -0.1196006,
+        "category": "food",
+        "lat": 6.7046424,
+        "lon": -1.6188703,
         "url": ""
       },
-      "way/4254099": {
-        "poi_id": "way/4254099",
-        "name": "Victoria Embankment Gardens",
-        "category": "outdoors",
-        "lat": 51.5086161,
-        "lon": -0.1210405,
-        "url": "https://www.westminster.gov.uk/parks-and-open-spaces/victoria-embankment-gardens"
-      },
-      "way/4256144": {
-        "poi_id": "way/4256144",
-        "name": "Argyle Square Gardens",
-        "category": "outdoors",
-        "lat": 51.5290446,
-        "lon": -0.122248,
+      "node/10614484205": {
+        "poi_id": "node/10614484205",
+        "name": "Chicken Man",
+        "category": "food",
+        "lat": 6.6838078,
+        "lon": -1.6042703,
         "url": ""
       },
-      "way/4256229": {
-        "poi_id": "way/4256229",
-        "name": "Golden Square",
-        "category": "outdoors",
-        "lat": 51.511655,
-        "lon": -0.1371829,
+      "node/10915931605": {
+        "poi_id": "node/10915931605",
+        "name": "X5 plus",
+        "category": "food",
+        "lat": 6.7095157,
+        "lon": -1.6171634,
         "url": ""
       },
-      "way/4256264": {
-        "poi_id": "way/4256264",
-        "name": "Vauxhall Pleasure Gardens",
-        "category": "outdoors",
-        "lat": 51.4874704,
-        "lon": -0.1207242,
-        "url": "https://beta.lambeth.gov.uk/parks/vauxhall-pleasure-gardens"
-      },
-      "way/4256950": {
-        "poi_id": "way/4256950",
-        "name": "Whitehall Garden",
-        "category": "outdoors",
-        "lat": 51.5056433,
-        "lon": -0.1233752,
+      "node/11061791105": {
+        "poi_id": "node/11061791105",
+        "name": "Hajia 1 Special Joint",
+        "category": "food",
+        "lat": 6.7006084,
+        "lon": -1.5981296,
         "url": ""
       },
-      "way/4256953": {
-        "poi_id": "way/4256953",
-        "name": "Whitehall Garden",
-        "category": "outdoors",
-        "lat": 51.5039218,
-        "lon": -0.1239099,
+      "node/11071223705": {
+        "poi_id": "node/11071223705",
+        "name": "Rais-Meena Restaurant",
+        "category": "food",
+        "lat": 6.7004548,
+        "lon": -1.6068049,
         "url": ""
       },
-      "way/4257005": {
-        "poi_id": "way/4257005",
-        "name": "Grosvenor Gardens",
-        "category": "outdoors",
-        "lat": 51.4977368,
-        "lon": -0.1472135,
-        "url": ""
-      },
-      "way/4257006": {
-        "poi_id": "way/4257006",
-        "name": "Grosvenor Gardens",
-        "category": "outdoors",
-        "lat": 51.4965188,
-        "lon": -0.1455498,
-        "url": ""
-      },
-      "way/4258095": {
-        "poi_id": "way/4258095",
-        "name": "Christchurch Gardens",
-        "category": "outdoors",
-        "lat": 51.4981134,
-        "lon": -0.1344937,
+      "node/11399135014": {
+        "poi_id": "node/11399135014",
+        "name": "Han Court Chinese Restaurant",
+        "category": "food",
+        "lat": 6.6807213,
+        "lon": -1.6338219,
         "url": ""
       }
     },
     "guide_chunks": {
-      "london_48": {
-        "chunk_id": "london_48",
-        "source": "Wikivoyage:London",
-        "text": "[ edit ] \n Wikivoyage has a guide to Rail travel in Great Britain \n London is a major destination on the British rail network and every major city has a regular connection with the capital.\n\nBy National Rail\n\n[ edit ] \n Prices vary depending on ticket type. These include:\n\nAnytime - travel at any time of day. Return tickets may usually be used within one month of your outbound journey. This is the most expensive ticket type and can be well in excess of £200 for some journeys.\n\nOff-peak - travel at off-peak times only. As a rule of thumb, you cannot travel on trains arriving into London between 6.30am and 10am on weekdays, or trains departing London between 4pm and 7pm on weekdays - although times vary by operator. Be sure to check with the retailer before you travel.",
-        "score": 0.11847946434054756
+      "kumasi_10": {
+        "chunk_id": "kumasi_10",
+        "source": "Wikivoyage:Kumasi",
+        "text": "[ edit ] \n A tour of the Palace grounds explains the history of the Ashanti people and the significance of the Ashanti cultural history.",
+        "score": 0.2215162732070305
       },
-      "london_339": {
-        "chunk_id": "london_339",
-        "source": "Wikivoyage:London",
-        "text": "This city travel guide to London has guide status. It has a variety of good, quality information including hotels, restaurants, attractions and travel details. Please contribute and help us make it a star !",
-        "score": 0.11368162340872848
+      "kumasi_4": {
+        "chunk_id": "kumasi_4",
+        "source": "Wikivoyage:Kumasi",
+        "text": "[ edit ] \n Flights from Accra to Kumasi are about 45 minutes long, limited on luggage allowance. Excellent way to get to Kumasi, preferred by most. Small planes, yet short trip.\n\nBy car\n\n[ edit ] \n Car rental in Kumasi is available at the lowest cost of about US$75-100 per day.\n\nBy bus\n\n[ edit ] \n To travel by road to Kumasi from Accra you will need to allow 6 hours travel time. The STC bus service does not seem to be running anymore, or very sporadically; however private bus companies like VIP Jeoun (a Korean company) have taken over this route. Price is 120 cedis for a very comfortable and luxury bus (every row contains three seats; two on one side and one on the other), or 100 cedis for regular touring bus (4 seats in each row).\n\nGet around",
+        "score": 0.09447747552836598
       },
-      "london_49": {
-        "chunk_id": "london_49",
-        "source": "Wikivoyage:London",
-        "text": "Super off-peak - travel at the very quietest times of day. Super off-peak times vary by operator. Be sure to check with the retailer before you travel.\n\nAdvance - travel on a specific service. You may only travel on your booked train. This is generally the cheapest ticket type, with prices cheaper the further in advance you book.\n \n National Rail ( ) is the umbrella brand for the rail network in Great Britain. It does not include London Underground ( ), Tramlink or DLR (   DLR   ), but some vendors sell London Travelcards which are valid for travel across the Transport for London networks. Some through tickets are also valid on London services.\n\nYou can buy tickets at ticket offices, via individual train companies or online:\n\nNational Rail Enquiries - https://www.nationalrail.co.uk/ or by phone ☏ +44 345 748 4950\n\nTrainline - https://www.thetrainline.com/",
-        "score": 0.11242339626918627
+      "kumasi_3": {
+        "chunk_id": "kumasi_3",
+        "source": "Wikivoyage:Kumasi",
+        "text": "The city is the home of the Ashanti King, Otumfuo Osei Tutu II (as of 2023), to whom Ashantis from all walks of life pay homage. The king presides over the traditional courts that some residents use instead of the official judicial system.\n\nPrior to the British colonisation, Kumasi was the capital of the Ashanti Empire, one of the great civilisations of Africa. Once one of the most impressive pre-colonial cities in Africa, it was largely destroyed by the British in a series of wars at the end of the 19th century. Little remains of its former glory.\n\nThe urban area has a population of over 3.4 million (2021). The local language is predominantly Akan Twi.\n\nGet in\n\n[ edit ] \n Map of Kumasi \n Kumasi is a cosmopolitan city with a good road network and one can travel on local buses which ply predetermined routes or charter/hire taxis to take one to his preferred destination.\n\nBy plane",
+        "score": 0.057006337533341965
       }
     },
-    "last_city": "London",
+    "last_city": "Kumasi",
     "trace": [
       {
         "step_type": "tool_execution",
         "tool_name": "search_pois",
         "arguments": {
-          "city_name": "London",
+          "city_name": "Kumasi",
           "interests": [
-            "outdoors",
-            "shopping"
+            "food",
+            "history"
           ],
           "radius": 3000,
           "limit": 24
@@ -474,8 +382,8 @@
         "step_type": "tool_execution",
         "tool_name": "retrieve_guides",
         "arguments": {
-          "destination": "London",
-          "query": "London travel tips for outdoors, shopping with a balanced pace",
+          "destination": "Kumasi",
+          "query": "Kumasi travel tips for food, history with a balanced pace",
           "top_k": 3
         },
         "result_count": 3
