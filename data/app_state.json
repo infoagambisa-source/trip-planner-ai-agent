@@ -1,11 +1,11 @@
 {
   "saved_itinerary": {
     "destination": "London",
-    "start_date": "2026-05-18",
+    "start_date": "2026-03-23",
     "duration_days": 5,
     "pace": "balanced",
     "constraints": "",
-    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-05-18 focused on food, museums. Includes context from 3 retrieved guide chunks. Refined request: avoid busy evenings",
+    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-03-23.",
     "days": [
       {
         "day": 1,
@@ -13,42 +13,42 @@
         "morning": [
           {
             "time": "09:00",
-            "name": "Woburn Cafe",
-            "activity": "Visit Woburn Cafe",
-            "why": "Good match for your interest in food.",
-            "poi_id": "node/25475389",
-            "category": "food",
+            "name": "Unnamed",
+            "activity": "Visit Unnamed",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "node/321509757",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Cafe Angel",
-            "activity": "Explore Cafe Angel",
-            "why": "Recommended as a worthwhile food stop in London.",
-            "poi_id": "node/25497832",
-            "category": "food",
+            "name": "The Mound",
+            "activity": "Explore The Mound",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "node/8794628426",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Old Tree Daiwan Bee",
-            "activity": "Spend the evening at Old Tree Daiwan Bee",
+            "name": "Russell Square",
+            "activity": "Spend the evening at Russell Square",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "node/26845558",
-            "category": "food",
+            "poi_id": "way/3241371",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ]
@@ -59,42 +59,42 @@
         "morning": [
           {
             "time": "09:00",
-            "name": "Farmer J",
-            "activity": "Visit Farmer J",
-            "why": "Good match for your interest in food.",
-            "poi_id": "node/60660465",
-            "category": "food",
+            "name": "Tavistock Square",
+            "activity": "Visit Tavistock Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/3241840",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "The Serpentine Lido Cafe",
-            "activity": "Explore The Serpentine Lido Cafe",
-            "why": "Recommended as a worthwhile food stop in London.",
-            "poi_id": "node/130210673",
-            "category": "food",
+            "name": "Kensington Gardens",
+            "activity": "Explore Kensington Gardens",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/3986346",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Starbucks",
-            "activity": "Spend the evening at Starbucks",
+            "name": "Lincoln's Inn",
+            "activity": "Spend the evening at Lincoln's Inn",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "node/140681851",
-            "category": "food",
+            "poi_id": "way/4075108",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ]
@@ -105,88 +105,88 @@
         "morning": [
           {
             "time": "09:00",
-            "name": "Greggs",
-            "activity": "Visit Greggs",
-            "why": "Good match for your interest in food.",
-            "poi_id": "node/140697749",
-            "category": "food",
+            "name": "Grosvenor Square",
+            "activity": "Visit Grosvenor Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/4081049",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Bon Gusto",
-            "activity": "Explore Bon Gusto",
-            "why": "Recommended as a worthwhile food stop in London.",
-            "poi_id": "node/169355678",
-            "category": "food",
+            "name": "Leicester Square",
+            "activity": "Explore Leicester Square",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4082589",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Bank Restaurant & Bar",
-            "activity": "Spend the evening at Bank Restaurant & Bar",
+            "name": "Woburn Square",
+            "activity": "Spend the evening at Woburn Square",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "node/169368767",
-            "category": "food",
+            "poi_id": "way/4253286",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ]
       },
       {
         "day": 4,
-        "theme": "Day 4 in London (Regenerated)",
+        "theme": "Day 4 in London",
         "morning": [
           {
             "time": "09:00",
-            "name": "Buckingham Coffee Lounge",
-            "activity": "Visit Buckingham Coffee Lounge",
-            "why": "Good match for your interest in food. Updated for day-specific refinement.",
-            "poi_id": "node/169436940",
-            "category": "food",
+            "name": "Gordon Square",
+            "activity": "Visit Gordon Square",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/4253288",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Spaghetti House",
-            "activity": "Explore Spaghetti House",
-            "why": "Recommended as a worthwhile food stop in London. Updated for day-specific refinement.",
-            "poi_id": "node/180403503",
-            "category": "food",
+            "name": "West Square Gardens",
+            "activity": "Explore West Square Gardens",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4253527",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Las Iguanas",
-            "activity": "Spend the evening at Las Iguanas",
-            "why": "Adds variety to the day and fits your selected interests. Updated for day-specific refinement.",
-            "poi_id": "node/247957988",
-            "category": "food",
+            "name": "Queen Square Gardens",
+            "activity": "Spend the evening at Queen Square Gardens",
+            "why": "Adds variety to the day and fits your selected interests.",
+            "poi_id": "way/4253646",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ]
@@ -197,42 +197,42 @@
         "morning": [
           {
             "time": "09:00",
-            "name": "The Garrick",
-            "activity": "Visit The Garrick",
-            "why": "Good match for your interest in food.",
-            "poi_id": "node/256497884",
-            "category": "food",
+            "name": "Red Lion Square Gardens",
+            "activity": "Visit Red Lion Square Gardens",
+            "why": "Good match for your interest in outdoors.",
+            "poi_id": "way/4253657",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "afternoon": [
           {
             "time": "13:00",
-            "name": "Goya",
-            "activity": "Explore Goya",
-            "why": "Recommended as a worthwhile food stop in London.",
-            "poi_id": "node/259569252",
-            "category": "food",
+            "name": "Berkeley Square",
+            "activity": "Explore Berkeley Square",
+            "why": "Recommended as a worthwhile outdoors stop in London.",
+            "poi_id": "way/4253887",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ],
         "evening": [
           {
             "time": "18:00",
-            "name": "Sketch",
-            "activity": "Spend the evening at Sketch",
+            "name": "Unnamed",
+            "activity": "Spend the evening at Unnamed",
             "why": "Adds variety to the day and fits your selected interests.",
-            "poi_id": "node/259774384",
-            "category": "food",
+            "poi_id": "way/4253932",
+            "category": "outdoors",
             "citations": [
-              "london_1",
-              "london_197"
+              "london_48",
+              "london_339"
             ]
           }
         ]
@@ -241,169 +241,217 @@
   },
   "saved_tool_state": {
     "pois": {
-      "node/25475389": {
-        "poi_id": "node/25475389",
-        "name": "Woburn Cafe",
-        "category": "food",
-        "lat": 51.5265807,
-        "lon": -0.1292505,
+      "node/321509757": {
+        "poi_id": "node/321509757",
+        "name": "Unnamed",
+        "category": "outdoors",
+        "lat": 51.5343778,
+        "lon": -0.1267216,
         "url": ""
       },
-      "node/25497832": {
-        "poi_id": "node/25497832",
-        "name": "Cafe Angel",
-        "category": "food",
-        "lat": 51.5247641,
-        "lon": -0.1161125,
+      "node/8794628426": {
+        "poi_id": "node/8794628426",
+        "name": "The Mound",
+        "category": "outdoors",
+        "lat": 51.4989711,
+        "lon": -0.1463617,
         "url": ""
       },
-      "node/26845558": {
-        "poi_id": "node/26845558",
-        "name": "Old Tree Daiwan Bee",
-        "category": "food",
-        "lat": 51.5110542,
-        "lon": -0.1325596,
+      "way/3241371": {
+        "poi_id": "way/3241371",
+        "name": "Russell Square",
+        "category": "outdoors",
+        "lat": 51.5216943,
+        "lon": -0.126069,
         "url": ""
       },
-      "node/60660465": {
-        "poi_id": "node/60660465",
-        "name": "Farmer J",
-        "category": "food",
-        "lat": 51.5229924,
-        "lon": -0.1257455,
+      "way/3241840": {
+        "poi_id": "way/3241840",
+        "name": "Tavistock Square",
+        "category": "outdoors",
+        "lat": 51.5250414,
+        "lon": -0.1290244,
         "url": ""
       },
-      "node/130210673": {
-        "poi_id": "node/130210673",
-        "name": "The Serpentine Lido Cafe",
-        "category": "food",
-        "lat": 51.5046688,
-        "lon": -0.1696555,
-        "url": "https://www.royalparks.org.uk/parks/hyde-park/food-and-drink/lido-bar-and-cafe"
+      "way/3986346": {
+        "poi_id": "way/3986346",
+        "name": "Kensington Gardens",
+        "category": "outdoors",
+        "lat": 51.5066483,
+        "lon": -0.1802014,
+        "url": "https://www.royalparks.org.uk/visit/parks/kensington-gardens"
       },
-      "node/140681851": {
-        "poi_id": "node/140681851",
-        "name": "Starbucks",
-        "category": "food",
-        "lat": 51.4989916,
-        "lon": -0.1354995,
+      "way/4075108": {
+        "poi_id": "way/4075108",
+        "name": "Lincoln's Inn",
+        "category": "outdoors",
+        "lat": 51.5170075,
+        "lon": -0.1144526,
         "url": ""
       },
-      "node/140697749": {
-        "poi_id": "node/140697749",
-        "name": "Greggs",
-        "category": "food",
-        "lat": 51.4982302,
-        "lon": -0.1352163,
-        "url": "https://www.greggs.co.uk/shop-finder?shop-code=0919"
-      },
-      "node/169355678": {
-        "poi_id": "node/169355678",
-        "name": "Bon Gusto",
-        "category": "food",
-        "lat": 51.4992102,
-        "lon": -0.1378188,
+      "way/4081049": {
+        "poi_id": "way/4081049",
+        "name": "Grosvenor Square",
+        "category": "outdoors",
+        "lat": 51.5115067,
+        "lon": -0.1513923,
         "url": ""
       },
-      "node/169368767": {
-        "poi_id": "node/169368767",
-        "name": "Bank Restaurant & Bar",
-        "category": "food",
-        "lat": 51.4986304,
-        "lon": -0.1372558,
-        "url": "https://www.individualrestaurants.com/"
-      },
-      "node/169436940": {
-        "poi_id": "node/169436940",
-        "name": "Buckingham Coffee Lounge",
-        "category": "food",
-        "lat": 51.4987752,
-        "lon": -0.1412257,
+      "way/4082589": {
+        "poi_id": "way/4082589",
+        "name": "Leicester Square",
+        "category": "outdoors",
+        "lat": 51.5104369,
+        "lon": -0.1301305,
         "url": ""
       },
-      "node/180403503": {
-        "poi_id": "node/180403503",
-        "name": "Spaghetti House",
-        "category": "food",
-        "lat": 51.5186204,
-        "lon": -0.1214512,
-        "url": "https://www.spaghettihouse.co.uk/location/holborn/"
-      },
-      "node/247957988": {
-        "poi_id": "node/247957988",
-        "name": "Las Iguanas",
-        "category": "food",
-        "lat": 51.5055602,
-        "lon": -0.1176655,
-        "url": "https://www.iguanas.co.uk/restaurants/london-royal-festival-hall/"
-      },
-      "node/256497884": {
-        "poi_id": "node/256497884",
-        "name": "The Garrick",
-        "category": "food",
-        "lat": 51.5134807,
-        "lon": -0.1165232,
-        "url": "http://www.lse.ac.uk/intranet/LSEServices/cateringServices/restaurantsAndCafes/garrick.aspx"
-      },
-      "node/259569252": {
-        "poi_id": "node/259569252",
-        "name": "Goya",
-        "category": "food",
-        "lat": 51.4884009,
-        "lon": -0.1374885,
+      "way/4253286": {
+        "poi_id": "way/4253286",
+        "name": "Woburn Square",
+        "category": "outdoors",
+        "lat": 51.5233255,
+        "lon": -0.1296417,
         "url": ""
       },
-      "node/259774384": {
-        "poi_id": "node/259774384",
-        "name": "Sketch",
-        "category": "food",
-        "lat": 51.5127342,
-        "lon": -0.1414857,
-        "url": "https://sketch.london/"
-      },
-      "node/261325961": {
-        "poi_id": "node/261325961",
-        "name": "Tia Maria Bar & Kitchen",
-        "category": "food",
-        "lat": 51.4808939,
-        "lon": -0.12483,
+      "way/4253288": {
+        "poi_id": "way/4253288",
+        "name": "Gordon Square",
+        "category": "outdoors",
+        "lat": 51.524262,
+        "lon": -0.1308717,
         "url": ""
       },
-      "node/262565580": {
-        "poi_id": "node/262565580",
-        "name": "Giraffe",
-        "category": "food",
-        "lat": 51.5063119,
-        "lon": -0.1171395,
-        "url": "https://www.giraffe.net/"
+      "way/4253527": {
+        "poi_id": "way/4253527",
+        "name": "West Square Gardens",
+        "category": "outdoors",
+        "lat": 51.4951846,
+        "lon": -0.1055267,
+        "url": ""
       },
-      "node/262565828": {
-        "poi_id": "node/262565828",
-        "name": "PizzaExpress",
-        "category": "food",
-        "lat": 51.4888419,
-        "lon": -0.137108,
-        "url": "https://www.pizzaexpress.com/london-pimlico"
+      "way/4253646": {
+        "poi_id": "way/4253646",
+        "name": "Queen Square Gardens",
+        "category": "outdoors",
+        "lat": 51.5217715,
+        "lon": -0.1224453,
+        "url": ""
+      },
+      "way/4253657": {
+        "poi_id": "way/4253657",
+        "name": "Red Lion Square Gardens",
+        "category": "outdoors",
+        "lat": 51.5191892,
+        "lon": -0.1188966,
+        "url": ""
+      },
+      "way/4253887": {
+        "poi_id": "way/4253887",
+        "name": "Berkeley Square",
+        "category": "outdoors",
+        "lat": 51.5096414,
+        "lon": -0.1458119,
+        "url": ""
+      },
+      "way/4253932": {
+        "poi_id": "way/4253932",
+        "name": "Unnamed",
+        "category": "outdoors",
+        "lat": 51.5106382,
+        "lon": -0.1196006,
+        "url": ""
+      },
+      "way/4254099": {
+        "poi_id": "way/4254099",
+        "name": "Victoria Embankment Gardens",
+        "category": "outdoors",
+        "lat": 51.5086161,
+        "lon": -0.1210405,
+        "url": "https://www.westminster.gov.uk/parks-and-open-spaces/victoria-embankment-gardens"
+      },
+      "way/4256144": {
+        "poi_id": "way/4256144",
+        "name": "Argyle Square Gardens",
+        "category": "outdoors",
+        "lat": 51.5290446,
+        "lon": -0.122248,
+        "url": ""
+      },
+      "way/4256229": {
+        "poi_id": "way/4256229",
+        "name": "Golden Square",
+        "category": "outdoors",
+        "lat": 51.511655,
+        "lon": -0.1371829,
+        "url": ""
+      },
+      "way/4256264": {
+        "poi_id": "way/4256264",
+        "name": "Vauxhall Pleasure Gardens",
+        "category": "outdoors",
+        "lat": 51.4874704,
+        "lon": -0.1207242,
+        "url": "https://beta.lambeth.gov.uk/parks/vauxhall-pleasure-gardens"
+      },
+      "way/4256950": {
+        "poi_id": "way/4256950",
+        "name": "Whitehall Garden",
+        "category": "outdoors",
+        "lat": 51.5056433,
+        "lon": -0.1233752,
+        "url": ""
+      },
+      "way/4256953": {
+        "poi_id": "way/4256953",
+        "name": "Whitehall Garden",
+        "category": "outdoors",
+        "lat": 51.5039218,
+        "lon": -0.1239099,
+        "url": ""
+      },
+      "way/4257005": {
+        "poi_id": "way/4257005",
+        "name": "Grosvenor Gardens",
+        "category": "outdoors",
+        "lat": 51.4977368,
+        "lon": -0.1472135,
+        "url": ""
+      },
+      "way/4257006": {
+        "poi_id": "way/4257006",
+        "name": "Grosvenor Gardens",
+        "category": "outdoors",
+        "lat": 51.4965188,
+        "lon": -0.1455498,
+        "url": ""
+      },
+      "way/4258095": {
+        "poi_id": "way/4258095",
+        "name": "Christchurch Gardens",
+        "category": "outdoors",
+        "lat": 51.4981134,
+        "lon": -0.1344937,
+        "url": ""
       }
     },
     "guide_chunks": {
-      "london_1": {
-        "chunk_id": "london_1",
+      "london_48": {
+        "chunk_id": "london_48",
         "source": "Wikivoyage:London",
-        "text": "For the visitor, there is a seemingly endless choice of historical sites, shopping, museums, food, art galleries, nightlife, and activities. Once a Celtic settlement, London is a bustling city, where visitors come to experience the urban heritage and see its specific royal-themed attractions.\n\nDistricts",
-        "score": 0.16242104223520631
+        "text": "[ edit ] \n Wikivoyage has a guide to Rail travel in Great Britain \n London is a major destination on the British rail network and every major city has a regular connection with the capital.\n\nBy National Rail\n\n[ edit ] \n Prices vary depending on ticket type. These include:\n\nAnytime - travel at any time of day. Return tickets may usually be used within one month of your outbound journey. This is the most expensive ticket type and can be well in excess of £200 for some journeys.\n\nOff-peak - travel at off-peak times only. As a rule of thumb, you cannot travel on trains arriving into London between 6.30am and 10am on weekdays, or trains departing London between 4pm and 7pm on weekdays - although times vary by operator. Be sure to check with the retailer before you travel.",
+        "score": 0.11847946434054756
       },
-      "london_197": {
-        "chunk_id": "london_197",
+      "london_339": {
+        "chunk_id": "london_339",
         "source": "Wikivoyage:London",
-        "text": "[ edit ] \n Natural History Museum, dubbed the 'cathedral of nature' \n Central London hosts an outstanding collection of world-class museums and galleries, several of truly iconic status.\n\nEven better, London is unique among global capitals in that the majority of the museums have no entrance charges, allowing visitors to make multiple visits with ease. Special or temporary exhibitions usually attract an admission charge.\n\nLondon museums and galleries with no general admission charge (free entry!) include:\n\nBritish Museum (Tube: Holborn)—a treasure trove of world cultures from across the ages, on par with the Paris Louvre and New York's Metropolitan Museum\n\nNational Gallery (Tube: Charing Cross)—houses the national collection of paintings in the Western European tradition from the 13th to the 19th centuries\n\nNational Portrait Gallery (Tube: Charing Cross)",
-        "score": 0.12159554452873171
+        "text": "This city travel guide to London has guide status. It has a variety of good, quality information including hotels, restaurants, attractions and travel details. Please contribute and help us make it a star !",
+        "score": 0.11368162340872848
       },
-      "london_252": {
-        "chunk_id": "london_252",
+      "london_49": {
+        "chunk_id": "london_49",
         "source": "Wikivoyage:London",
-        "text": "[ edit ] \n Although Tesco, Sainsbury's and other supermarkets run smaller stores in central London, full-size superstores, including Morrisons and ASDA, are rare in the city centre – with the exception of the Sainsbury's in Pimlico – and you will usually have to take a 15- to 20-minute Tube ride to reach one.\n\nMarks & Spencer , an upmarket retailer, also operate food halls branded as \"Simply Food\". They can be found across central London . The smaller stores, such as those found in train stations, tend to focus mostly on ready-to-eat food such as sandwiches, drinks, snacks, and also essentials such as bread and milk.\n\nDrink\n\n[ edit ] \n London is home to a great many pubs, bars and nightclubs. The online city guide View London and the weekly magazine Time Out tell what's going in London's night life, as well as cultural events in general.\n\nPubs and bars",
-        "score": 0.11992075826115864
+        "text": "Super off-peak - travel at the very quietest times of day. Super off-peak times vary by operator. Be sure to check with the retailer before you travel.\n\nAdvance - travel on a specific service. You may only travel on your booked train. This is generally the cheapest ticket type, with prices cheaper the further in advance you book.\n \n National Rail ( ) is the umbrella brand for the rail network in Great Britain. It does not include London Underground ( ), Tramlink or DLR (   DLR   ), but some vendors sell London Travelcards which are valid for travel across the Transport for London networks. Some through tickets are also valid on London services.\n\nYou can buy tickets at ticket offices, via individual train companies or online:\n\nNational Rail Enquiries - https://www.nationalrail.co.uk/ or by phone ☏ +44 345 748 4950\n\nTrainline - https://www.thetrainline.com/",
+        "score": 0.11242339626918627
       }
     },
     "last_city": "London",
@@ -414,20 +462,20 @@
         "arguments": {
           "city_name": "London",
           "interests": [
-            "food",
-            "museums"
+            "outdoors",
+            "shopping"
           ],
           "radius": 3000,
-          "limit": 18
+          "limit": 24
         },
-        "result_count": 18
+        "result_count": 24
       },
       {
         "step_type": "tool_execution",
         "tool_name": "retrieve_guides",
         "arguments": {
           "destination": "London",
-          "query": "London travel tips for food, museums with a balanced pace",
+          "query": "London travel tips for outdoors, shopping with a balanced pace",
           "top_k": 3
         },
         "result_count": 3

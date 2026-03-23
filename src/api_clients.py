@@ -6,6 +6,7 @@ import html
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from src.feedback import feedback_boost_map, normalize_city_key
 
 USER_AGENT = "trip-planner-capstone/1.0 (info.agambisa@gmail.com)"
 HEADERS = {"User-Agent": USER_AGENT}
@@ -186,8 +187,21 @@ def search_pois(city_name, interests, radius=3000, limit=20):
             if poi["poi_id"] in seen_ids:
                 continue
 
+            poi["_base_score"] = 1.0
             seen_ids.add(poi["poi_id"])
             all_pois.append(poi)
+
+    city_key = normalize_city_key(city_name)
+    boost_map = feedback_boost_map(city_key)
+
+    for poi in all_pois:
+        poi["_score"] = poi["_base_score"] + boost_map.get(poi["poi_id"], 0.0)
+
+    all_pois.sort(key=lambda p: p["_score"], reverse=True)
+
+    for poi in all_pois:
+        poi.pop("_base_score", None)
+        poi.pop("_score", None)
 
     return all_pois[:limit]
 

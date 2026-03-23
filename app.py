@@ -5,6 +5,7 @@ import pydeck as pdk
 from src.agent import generate_itinerary, refine_itinerary
 from src.state_manager import load_app_state, save_app_state
 from src.map_utils import itinerary_to_map_data, filter_points_by_day, build_path_data, compute_view_state
+from src.feedback import save_feedback, normalize_city_key, feedback_stats_for_city
 
 st.set_page_config(page_title="Trip Planner AI Agent", layout="wide")
 
@@ -110,11 +111,13 @@ if generate_clicked:
 
 itinerary = st.session_state.itinerary
 
-def render_block(title, activities):
+def render_block(title, activities, destination):
     st.subheader(title)
     if not activities:
         st.caption("No activities planned.")
         return
+
+    city_key = normalize_city_key(destination)
 
     for item in activities:
         st.markdown(f"**{item.get('time', '')} — {item.get('name', 'Unknown place')}**")
@@ -133,6 +136,22 @@ def render_block(title, activities):
         if citations:
             st.caption("Sources: " + ", ".join(citations))
 
+        poi_id = item.get("poi_id")
+        if poi_id:
+            up_col, down_col, spacer = st.columns([1, 1, 6])
+
+            with up_col:
+                if st.button("👍", key=f"up_{title}_{poi_id}_{item.get('time', '')}"):
+                    save_feedback(city_key=city_key, poi_id=poi_id, vote="up")
+                    st.success(f"Saved upvote for {item.get('name', 'POI')}")
+                    st.rerun()
+
+            with down_col:
+                if st.button("👎", key=f"down_{title}_{poi_id}_{item.get('time', '')}"):
+                    save_feedback(city_key=city_key, poi_id=poi_id, vote="down")
+                    st.success(f"Saved downvote for {item.get('name', 'POI')}")
+                    st.rerun()
+
         st.markdown("---")
 
 if itinerary:
@@ -143,6 +162,27 @@ if itinerary:
     st.markdown(f"**Constraints:** {itinerary.get('constraints', 'None') or 'None'}")
     st.write(itinerary.get("summary", ""))
 
+    with st.expander("Feedback Stats", expanded=False):
+        city_key = normalize_city_key(itinerary.get("destination", ""))
+        stats = feedback_stats_for_city(city_key)
+
+        if stats:
+            feedback_rows = []
+            poi_lookup = st.session_state.tool_state.get("pois", {})
+
+            for poi_id, values in stats.items():
+                feedback_rows.append({
+                    "poi_id": poi_id,
+                    "name": poi_lookup.get(poi_id, {}).get("name", "Unknown"),
+                    "upvotes": values["up"],
+                    "downvotes": values["down"],
+                    "boost": values["boost"]
+                })
+
+            st.dataframe(feedback_rows)
+        else:
+            st.caption("No feedback recorded yet for this destination.")
+
     st.write("## Daily Itinerary")
 
     for day in itinerary.get("days", []):
@@ -151,13 +191,13 @@ if itinerary:
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            render_block("Morning", day.get("morning", []))
+            render_block("Morning", day.get("morning", []), itinerary.get("destination", ""))
         with col2:
-            render_block("Afternoon", day.get("afternoon", []))
+            render_block("Afternoon", day.get("afternoon", []), itinerary.get("destination", ""))
         with col3:
-            render_block("Evening", day.get("evening", []))
+            render_block("Evening", day.get("evening", []), itinerary.get("destination", ""))
 
-        st.write("## Interactive Map")
+    st.write("## Interactive Map")
 
     poi_lookup = st.session_state.tool_state.get("pois", {})
     points, day_paths = itinerary_to_map_data(itinerary, poi_lookup)
