@@ -16,6 +16,11 @@ An intelligent, production-style AI application that generates personalized trav
 ![Feedback](assets/refine.PNG)
 
 ---
+## Test App on Streamlit
+
+Link to view and test app on streamlit: https://trip-planner-ai-agent-kathskhb5q79yihowelq3q.streamlit.app/
+
+---
 
 ## 🚀 Features
 
