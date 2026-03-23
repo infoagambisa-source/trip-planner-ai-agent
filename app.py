@@ -2,7 +2,7 @@ import json
 import streamlit as st
 import pydeck as pdk
 
-from src.agent import generate_itinerary
+from src.agent import generate_itinerary, refine_itinerary
 from src.state_manager import load_app_state, save_app_state
 from src.map_utils import itinerary_to_map_data, filter_points_by_day, build_path_data, compute_view_state
 
@@ -24,6 +24,9 @@ if "tool_state" not in st.session_state:
 
 if "map_style" not in st.session_state:
     st.session_state.map_style = "light"
+
+if "previous_itinerary" not in st.session_state:
+    st.session_state.previous_itinerary = None
 
 st.title("Trip Planner AI Agent")
 st.write("Create personalised itineraries with POI search, optional travel-guide retrieval, and structured daily plans.")
@@ -235,6 +238,70 @@ if itinerary:
         st.pydeck_chart(deck, use_container_width=True)
     else:
         st.info("No map points available for the selected day filter.")
+
+    st.write("## Refine Itinerary")
+
+    refinement_request = st.text_input(
+        "Refinement request",
+        placeholder="e.g. make it more outdoorsy, add more food spots, avoid busy evenings"
+    )
+
+    day_numbers = [day.get("day") for day in itinerary.get("days", [])]
+    refine_mode = st.radio(
+        "Refinement mode",
+        options=["Full itinerary", "Single day"],
+        horizontal=True
+    )
+
+    target_day = None
+    if refine_mode == "Single day":
+        target_day = st.selectbox("Select day to regenerate", options=day_numbers)
+
+    if st.button("Apply Refinement"):
+        if not refinement_request.strip():
+            st.warning("Please enter a refinement request.")
+        else:
+            try:
+                st.session_state.previous_itinerary = json.loads(
+                    json.dumps(st.session_state.itinerary)
+                )
+
+                with st.status("Refining itinerary...", expanded=True) as status:
+                    status.write("Reviewing existing itinerary...")
+                    status.write("Applying refinement instructions...")
+                    status.write("Validating POI references...")
+
+                    refined_itinerary, refined_tool_state = refine_itinerary(
+                        api_key=st.session_state.openai_api_key,
+                        existing_itinerary=st.session_state.itinerary,
+                        user_request=refinement_request,
+                        tool_state=st.session_state.tool_state,
+                        target_day=target_day if refine_mode == "Single day" else None
+                    )
+
+                    st.session_state.itinerary = refined_itinerary
+                    st.session_state.tool_state = refined_tool_state
+                    save_app_state(refined_itinerary, refined_tool_state)
+
+                    status.update(label="Refinement applied successfully.", state="complete")
+
+                st.success("Itinerary updated.")
+                st.rerun()
+
+            except Exception as e:
+                st.error(f"Refinement error: {e}")
+
+    if st.session_state.previous_itinerary:
+        with st.expander("Before / After Comparison", expanded=False):
+            col_before, col_after = st.columns(2)
+
+            with col_before:
+                st.subheader("Before")
+                st.json(st.session_state.previous_itinerary)
+
+            with col_after:
+                st.subheader("After")
+                st.json(st.session_state.itinerary)
 
     st.write("## Export")
     itinerary_json = json.dumps(itinerary, indent=2, ensure_ascii=False)

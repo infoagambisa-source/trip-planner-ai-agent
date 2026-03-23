@@ -5,7 +5,7 @@
     "duration_days": 5,
     "pace": "balanced",
     "constraints": "",
-    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-05-18 focused on food, museums. Includes context from 3 retrieved guide chunks.",
+    "summary": "A 5-day balanced-pace itinerary for London starting on 2026-05-18 focused on food, museums. Includes context from 3 retrieved guide chunks. Refined request: avoid busy evenings",
     "days": [
       {
         "day": 1,
@@ -147,13 +147,13 @@
       },
       {
         "day": 4,
-        "theme": "Day 4 in London",
+        "theme": "Day 4 in London (Regenerated)",
         "morning": [
           {
             "time": "09:00",
             "name": "Buckingham Coffee Lounge",
             "activity": "Visit Buckingham Coffee Lounge",
-            "why": "Good match for your interest in food.",
+            "why": "Good match for your interest in food. Updated for day-specific refinement.",
             "poi_id": "node/169436940",
             "category": "food",
             "citations": [
@@ -167,7 +167,7 @@
             "time": "13:00",
             "name": "Spaghetti House",
             "activity": "Explore Spaghetti House",
-            "why": "Recommended as a worthwhile food stop in London.",
+            "why": "Recommended as a worthwhile food stop in London. Updated for day-specific refinement.",
             "poi_id": "node/180403503",
             "category": "food",
             "citations": [
@@ -181,7 +181,7 @@
             "time": "18:00",
             "name": "Las Iguanas",
             "activity": "Spend the evening at Las Iguanas",
-            "why": "Adds variety to the day and fits your selected interests.",
+            "why": "Adds variety to the day and fits your selected interests. Updated for day-specific refinement.",
             "poi_id": "node/247957988",
             "category": "food",
             "citations": [
