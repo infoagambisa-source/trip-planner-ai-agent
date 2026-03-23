@@ -7,7 +7,7 @@ An intelligent, production-style AI application that generates personalized trav
 ## 📸 Demo Preview
 
 * App Overview
-![Itinerary](assets/overview.png)
+![Itinerary](assets/overview.PNG)
 * Itinerary view
 ![Itinerary](assets/itinerary_view.PNG)
 * Interactive map
