@@ -62,7 +62,7 @@ with st.sidebar:
     if st.button("Clear API Key"):
         st.session_state.openai_api_key = ""
         st.rerun()
-        
+
     st.header("Configuration")
 
     st.session_state.fast_mode = st.toggle(
@@ -254,7 +254,7 @@ if itinerary:
     st.write("## Daily Itinerary")
 
     for day in itinerary.get("days", []):
-        st.markdown(f"### Day {day.get('day')} — {day.get('theme', '')}")
+        st.markdown(f"### {day.get('theme', '')}")
 
         col1, col2, col3 = st.columns(3)
 
@@ -289,6 +289,7 @@ if itinerary:
             "ScatterplotLayer",
             data=filtered_points,
             get_position="[lon, lat]",
+            get_fill_color="color",
             get_radius=35,  
             radius_min_pixels=3, 
             radius_max_pixels=10, 
@@ -314,6 +315,7 @@ if itinerary:
                 "PathLayer",
                 data=filtered_paths,
                 get_path="path",
+                get_color="color",
                 width_scale=4,
                 width_min_pixels=2,
                 get_width=3,

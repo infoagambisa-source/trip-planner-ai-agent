@@ -1,5 +1,17 @@
 import math
 
+DAY_COLORS = [
+    [230, 57, 70],    # red
+    [29, 53, 87],     # blue
+    [42, 157, 143],   # teal
+    [233, 196, 106],  # yellow
+    [244, 162, 97],   # orange
+    [106, 76, 147],   # purple
+    [76, 175, 80],    # green
+]
+
+def get_day_color(day_num):
+    return DAY_COLORS[(day_num - 1) % len(DAY_COLORS)]
 
 def itinerary_to_map_data(itinerary, poi_lookup):
     """
@@ -32,7 +44,8 @@ def itinerary_to_map_data(itinerary, poi_lookup):
                     "day": day_num,
                     "block": block_name.title(),
                     "time": item.get("time", ""),
-                    "why": item.get("why", "")
+                    "why": item.get("why", ""),
+                    "color": get_day_color(day_num)
                 }
 
                 points.append(point)
@@ -56,7 +69,8 @@ def build_path_data(day_paths, selected_day="All Days"):
                 path_data.append({
                     "name": f"Day {day_num}",
                     "day": day_num,
-                    "path": path
+                    "path": path,
+                    "color": get_day_color(day_num)
                 })
     else:
         path = day_paths.get(selected_day, [])
@@ -64,7 +78,8 @@ def build_path_data(day_paths, selected_day="All Days"):
             path_data.append({
                 "name": f"Day {selected_day}",
                 "day": selected_day,
-                "path": path
+                "path": path,
+                "color": get_day_color(selected_day)
             })
 
     return path_data
